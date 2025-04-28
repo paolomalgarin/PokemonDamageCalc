@@ -1,9 +1,21 @@
 @media (prefers-color-scheme: dark) {
-	:root {
-	}
+    :root {
+        --primary-color: #323033;
+        --dark-primary-color: #0E1412;
+        --secondary-color: #F8F8F8;
+        --dark-secondary-color: #EBEBEB;
+        --accent-color: #3CB9FF;
+        --dark-accent-color: #00A3FF;
+    }
 }
 
 @media (prefers-color-scheme: light) {
     :root {
+        --primary-color: #F8F8F8;
+        --dark-primary-color: #EBEBEB;
+        --secondary-color: #323033;
+        --dark-secondary-color: #0E1412;
+        --accent-color: #EE6644;
+        --dark-accent-color: #EC532C;
     }
 }
