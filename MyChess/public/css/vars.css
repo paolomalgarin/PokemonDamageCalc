@@ -1,0 +1,15 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #1d2020;
+        --alt-primary-color: #323033;
+        --secondary-color: #DBDBDB;
+        --alt-secondary-color: #F8F8F8;
+        --accent-color: #00A3FF;
+        --alt-accent-color: #3CB9FF;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+    }
+}
