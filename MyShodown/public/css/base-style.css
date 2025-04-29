@@ -10,29 +10,37 @@
 
 /* 
     Struttura pulsante:
+    ‼️scrivere il testo del pulsante sia dentro lo span che dentro il pulsante‼️
+
     <div class='button'>
+        testo del pulsante
         <span class='btn-text'>testo del pulsante</span>
     </div>
 
     o
 
     <a href='' class='button'>
+        testo del pulsante
         <span class='btn-text'>testo del pulsante</span>
     </a>
 */
 .button {
     --btn-border: 2.5%;
     --btn-thin-border: 1px;
+    --btn-font-size: 32px;
 
     position: relative;
     display: inline-block;
     aspect-ratio: 4 / 2;
     box-sizing: border-box;
     clip-path: polygon(0 10%, 5% 0, calc(var(--btn-border) + 5%) calc(var(--btn-border) - var(--btn-thin-border)), calc(95% - var(--btn-border)) calc(var(--btn-border) - var(--btn-thin-border)), 95% 0, 100% 10%, 100% 90%, 95% 100%, calc(95% - var(--btn-border)) calc(100% - (var(--btn-border) - var(--btn-thin-border))), calc(var(--btn-border) + 5%) calc(100% - (var(--btn-border) - var(--btn-thin-border))), 5% 100%, 0 90%);
-    background-color: var(--dark-accent-color);
+    background-color: var(--secondary-color);
+    width: fit-content;
+    font-size: var(--btn-font-size);
+    padding: 10px calc(var(--btn-border)/2 + 10px);
 
     &:hover {
-        background-color: var(--accent-color);
+        background-color: var(--alt-secondary-color);
     }
 
     &::before {
@@ -44,7 +52,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: var(--dark-primary-color);
+        background-color: var(--alt-primary-color);
         clip-path: polygon(5% 0, 95% 0, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0 90%, 0 10%);
     }
 
@@ -58,16 +66,29 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--dark-accent-color);
+        color: var(--secondary-color);
         cursor: pointer;
         font-weight: bold;
-        font-size: 32px;
+        font-size: var(--btn-font-size);
 
         &:hover {
-            color: var(--accent-color);
+            color: var(--alt-secondary-color);
+        }
+    }
+}
+
+.button.accent {
+    background-color: var(--accent-color);
+
+    & .btn-text {
+        color: var(--accent-color);
+
+        &:hover {
+            color: var(--alt-accent-color);
         }
     }
 
-    /* css x testing */
-    width: 200px;
+    &:hover {
+        color: var(--alt-accent-color);
+    }
 }

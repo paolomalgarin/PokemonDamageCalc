@@ -16,7 +16,8 @@
 </head>
 
 <body>
-    <a href="play/index.php" class="button"><span class="btn-text">BUTTON</span></a>
+    <a href="play/index.php" class="button">BUTTON<span class="btn-text">BUTTON</span></a>
+    <a href="play/index.php" class="button accent">BUTTON ACCENT<br>xxxxxxxx<span class="btn-text">BUTTON ACCENT<br>xxxxxxxx</span></a>
 </body>
 
 </html>
