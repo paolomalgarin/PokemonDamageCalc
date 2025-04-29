@@ -1,6 +1,6 @@
-create database matchmaking;
+create database myshodown;
 
-use matchmaking;
+use myshodown;
 
 create table utenti (
     user_id int(15) auto_increment, -- PK
