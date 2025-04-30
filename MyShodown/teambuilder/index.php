@@ -31,6 +31,10 @@ Brave Nature
 
 $pkmn_assoc = parse_to_assoc($pkmn);
 
-header('Content-type: application/json');
+// header('Content-type: application/json');
 echo json_encode($pkmn_assoc);
-// var_dump($pkmn_assoc);
+
+echo '<br><br>';
+
+$pkmn_norm = parse_from_assoc($pkmn_assoc);
+echo str_replace("\n", "<br>", $pkmn_norm);

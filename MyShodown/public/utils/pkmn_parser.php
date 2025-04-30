@@ -4,7 +4,6 @@
     Araquanid (M) @ Expert Belt  
     Ability: Water Absorb  
     Shiny: Yes  
-    Tera Type: Water  
     EVs: 248 HP / 252 Atk / 8 SpA  
     Brave Nature  
     - Body Slam  
@@ -22,7 +21,7 @@ function parse_to_assoc($pkmn)
         'gender' => 'r',  // r = random, f = female, m = male
         'item' => null,
         'ability' => null,
-        'level' => null,
+        'level' => 50,
         'shiny' => false,
         'evs' => [
             'hp' => 0,
@@ -58,7 +57,7 @@ function parse_to_assoc($pkmn)
         if ($i === 0) {
             // nome & genere + oggetto
             $data = explode("@", $line);
-            if(str_contains($data[0], "(")) {
+            if (str_contains($data[0], "(")) {
                 $name = trim(explode("(", $data[0])[0]);
                 $gender = trim(explode("(", $data[0])[1], " ()\n\r\t\v\0");
                 $pkmn_assoc['name'] = $name;
@@ -117,9 +116,38 @@ function parse_to_assoc($pkmn)
 }
 
 // Contrario
-function parse_from_assoc($assoc) {}
-
-function parse_from_json($json)
+function parse_from_assoc($pkmn_assoc): string
 {
-    // work in progress...
+    // nome + genere
+    $pkmn_string = ucwords($pkmn_assoc['name']) . ($pkmn_assoc['gender'] !== 'r' ? ' (' . strtoupper($pkmn_assoc['gender']) . ')' : '');
+    // item
+    $pkmn_string .= ($pkmn_assoc['item'] ? ' @ ' . ucwords($pkmn_assoc['item']) . "\n" : '');
+    // ability
+    $pkmn_string .= ($pkmn_assoc['ability'] ? 'Ability: ' . ucwords($pkmn_assoc['ability']) . "\n" : '');
+    // level
+    $pkmn_string .= 'Level: ' . $pkmn_assoc['level'] . "\n";
+    // shiny
+    $pkmn_string .= ($pkmn_assoc['shiny'] ? "Shiny: Yes\n" : '');
+    // EVs
+    $pkmn_string .= 'EVs: ';
+    $evs = "";
+    foreach ($pkmn_assoc['evs'] as $name => $val) {
+        $evs .= "$val $name / ";
+    }
+    $pkmn_string .= trim($evs, "/ ") . "\n";
+    // natura
+    $pkmn_string .= ($pkmn_assoc['nature'] ? ucwords($pkmn_assoc['nature']) . ' Nature' . "\n" : '');
+    // IVs
+    $pkmn_string .= 'IVs: ';
+    $ivs = "";
+    foreach ($pkmn_assoc['ivs'] as $name => $val) {
+        $ivs .= "$val $name / ";
+    }
+    $pkmn_string .= trim($ivs, "/ ") . "\n";
+    // mosse
+    foreach ($pkmn_assoc['moves'] as $move) {
+        if ($move)
+            $pkmn_string .= "- " . ucwords($move) . "\n";
+    }
+    return $pkmn_string;
 }
