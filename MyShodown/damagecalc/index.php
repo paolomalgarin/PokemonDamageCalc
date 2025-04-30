@@ -1,6 +1,6 @@
 <?php
-require 'calc_stats.php';
-require 'calc_damage.php';
+require '../public/utils/calc_stats.php';
+require '../public/utils/calc_damage.php';
 
 /*
     Altaria @ Heavy-Duty Boots
@@ -13,6 +13,8 @@ require 'calc_damage.php';
     - Defog
     - Fire Spin
 */
+
+
 
 // Esempio: Pikachu (Livello 100) usa Thunderbolt contro Gyarados (Livello 100)
 $damage = calc_generic_damage(
