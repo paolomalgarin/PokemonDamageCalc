@@ -16,7 +16,6 @@ Jolly Nature
 - Knock Off
 ';
 
-
 // After parsing, check the structure
 $pkmn_atk = parse_to_assoc($weavile);
 $pkmn_def = parse_to_assoc($weavile);
@@ -32,6 +31,7 @@ $dmg = calc_damage_from_assoc($pkmn_atk, $pkmn_def, 0, 9, 1.0, 1.0, 1.0, false);
 $def_hp = calc_hp_from_assoc($pkmn_def);
 $max_dmg_perc = get_damage_perc($def_hp, $dmg['max']);
 $min_dmg_perc = get_damage_perc($def_hp, $dmg['min']);
+echo 'end: ' . date('H:i:s') . '<br>';
 
 ?>
 

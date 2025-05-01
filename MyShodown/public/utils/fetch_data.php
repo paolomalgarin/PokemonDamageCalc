@@ -6,6 +6,7 @@ function fetch_data_as_assoc($url) {
     return $data_assoc;
 }
 
+
 // $stat_id =  0(hp) 1(atk) 2(def) 3(spa) 4(spd) 5(spe)
 function get_base_stat($pkmn_name, $stat_id)
 {

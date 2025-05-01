@@ -122,35 +122,34 @@ function load_more_information(array $pkmn_assoc): array
     $name = strtolower($pkmn_assoc['name']);
     $baseUrl = 'https://pokeapi.co/api/v2';
 
-    // Richiesta dati generali del Pokémon
-    $pokemonJson = @file_get_contents("{$baseUrl}/pokemon/{$name}");
-    if ($pokemonJson !== false) {
-        $pokemonData = json_decode($pokemonJson, true);
-
-        // Tipi del Pokémon
+    // Ottieni dati generali del Pokémon
+    $pokemonData = fetch_data_as_assoc("{$baseUrl}/pokemon/{$name}");
+    if ($pokemonData) {
+        // Estrai tipi
         $pkmn_assoc['types'] = array_map(fn($t) => $t['type']['name'], $pokemonData['types']);
 
-        // Statistiche base
+        // Estrai statistiche base
         $base_stats = [];
         foreach ($pokemonData['stats'] as $stat) {
             $base_stats[$stat['stat']['name']] = $stat['base_stat'];
         }
         $pkmn_assoc['base_stats'] = $base_stats;
 
-        // Informazioni mosse
+        // Estrai informazioni mosse
         $moves_info = [];
         foreach ($pkmn_assoc['moves'] as $move) {
             if (empty($move)) continue;
+            
             $slug = str_replace(' ', '-', strtolower($move));
-            $moveJson = @file_get_contents("{$baseUrl}/move/{$slug}");
-            if ($moveJson !== false) {
-                $moveData = json_decode($moveJson, true);
+            $moveData = fetch_data_as_assoc("{$baseUrl}/move/{$slug}");
+            
+            if ($moveData) {
                 $moves_info[$move] = [
-                    'type'       => $moveData['type']['name'] ?? null,
-                    'base_power' => $moveData['power'] ?? null,
-                    'category' => $moveData['meta']['category']['name'] ?? null,
+                    'type'         => $moveData['type']['name'] ?? null,
+                    'base_power'   => $moveData['power'] ?? null,
+                    'category'     => $moveData['meta']['category']['name'] ?? null,
                     'damage_class' => $moveData['damage_class']['name'] ?? null,
-                    'priority' => $moveData['priority'] ?? null,
+                    'priority'     => $moveData['priority'] ?? null,
                 ];
             } else {
                 $moves_info[$move] = ['type' => null, 'base_power' => null];
