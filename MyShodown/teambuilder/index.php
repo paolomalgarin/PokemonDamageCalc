@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/utils/pkmn_parser.php';
+require '../public/utils/pkmn_parser.php';
 
 
 /*

@@ -12,7 +12,7 @@
     - Lunge
 */
 
-// Da forma sopra a json
+// Da forma sopra ad array assoc
 function parse_to_assoc($pkmn)
 {
     // Struttura base con valori di default
@@ -148,6 +148,9 @@ function load_more_information(array $pkmn_assoc): array
                 $moves_info[$move] = [
                     'type'       => $moveData['type']['name'] ?? null,
                     'base_power' => $moveData['power'] ?? null,
+                    'category' => $moveData['meta']['category']['name'] ?? null,
+                    'damage_class' => $moveData['damage_class']['name'] ?? null,
+                    'priority' => $moveData['priority'] ?? null,
                 ];
             } else {
                 $moves_info[$move] = ['type' => null, 'base_power' => null];

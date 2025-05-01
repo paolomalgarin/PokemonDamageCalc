@@ -171,40 +171,40 @@ function calc_damage_from_assoc($pkmn_atk_assoc, $pkmn_def_assoc, $move = 0, $ge
     if (!$pkmn_atk_assoc['moves'][$move]) {
         return -1;
     }
+    // Controllo se il pkmn ha i dati aggiuntivi (se è stata usata la funzione load_more_information())
+    if(!isset($pkmn_atk_assoc['base_stats']) || !isset($pkmn_def_assoc['base_stats'])) {
+        echo 'Il pokemon no ha dati sufficenti, usa la funzione load_more_information() per aggiungerli';
+        return -1;
+    }
 
     // -------------------------- LOGICA --------------------------
     // mi prendo i dati x le funzioni
-    $move_name = str_replace(" ", "-", $pkmn_atk_assoc['moves'][$move]);
-    $atk_name = str_replace(" ", "-", $pkmn_atk_assoc['name']);
-    $def_name = str_replace(" ", "-", $pkmn_def_assoc['name']);
-    $move_data = fetch_data_as_assoc("https://pokeapi.co/api/v2/move/$move_name");
-    $pkmn_atk_data = fetch_data_as_assoc("https://pokeapi.co/api/v2/pokemon/$atk_name");
-    $pkmn_def_data = fetch_data_as_assoc("https://pokeapi.co/api/v2/pokemon/$def_name");
+    $move_name = $pkmn_atk_assoc['moves'][$move];
 
-    if ($move_data['damage_class']['name'] === 'status') {
+    if (!str_contains($pkmn_atk_assoc['moves_info'][$move_name]['category'], 'damage')) {
         return 0;
     } else {
-        $is_move_phisical = $move_data['damage_class']['name'] === 'physical';
+        $is_move_phisical = $pkmn_atk_assoc['moves_info'][$move_name]['damage_class'] === 'physical';
     }
 
     $lvl = $pkmn_atk_assoc['level'];
-    $bsp = $move_data['power'];
+    $bsp = $pkmn_atk_assoc['moves_info'][$move_name]['base_power'];
     $attack_stat = calc_stat(
-        $pkmn_atk_data['stats'][($is_move_phisical ? 1 : 3)]['base_stat'],
+        $pkmn_atk_assoc['base_stats'][($is_move_phisical ? 'attack' : 'special-attack')],
         $pkmn_atk_assoc['ivs'][($is_move_phisical ? 'atk' : 'spa')],
         $pkmn_atk_assoc['evs'][($is_move_phisical ? 'atk' : 'spa')],
         $lvl,
         get_nature_multiplier($pkmn_atk_assoc['nature'], ($is_move_phisical ? 'attack' : 'special-attack'))
     );
     $defense_stat = calc_stat(
-        $pkmn_atk_data['stats'][($is_move_phisical ? 2 : 4)]['base_stat'],
-        $pkmn_atk_assoc['ivs'][($is_move_phisical ? 'def' : 'spd')],
-        $pkmn_atk_assoc['evs'][($is_move_phisical ? 'def' : 'spd')],
+        $pkmn_def_assoc['base_stats'][($is_move_phisical ? 'defense' : 'special-defense')],
+        $pkmn_def_assoc['ivs'][($is_move_phisical ? 'def' : 'spd')],
+        $pkmn_def_assoc['evs'][($is_move_phisical ? 'def' : 'spd')],
         $lvl,
-        get_nature_multiplier($pkmn_atk_assoc['nature'], ($is_move_phisical ? 'defense' : 'special-defense'))
+        get_nature_multiplier($pkmn_def_assoc['nature'], ($is_move_phisical ? 'defense' : 'special-defense'))
     );
-    $type_effectiveness = calculate_type_effectiveness($move_data['type']['name'], $pkmn_def_data['types']);
-    $stab = is_stab($move_data['type']['name'], $pkmn_atk_data['types']);
+    $type_effectiveness = calculate_type_effectiveness($pkmn_atk_assoc['moves_info'][$move_name]['type'], $pkmn_def_assoc['types']);
+    $stab = is_stab($pkmn_atk_assoc['moves_info'][$move_name]['type'], $pkmn_atk_assoc['types']);
 
     // calcolo il danno con le funzioni
     switch ($gen) {
@@ -410,7 +410,7 @@ function calculate_type_effectiveness($type_atk, $type_def)
 
     foreach ($type_def as $def_type) {
         // var_dump($def_type);
-        $def_name = strtolower($def_type['type']['name']);
+        $def_name = strtolower($def_type);
 
         // Controlla immunità
         if (in_array($def_name, $no_damage)) {
@@ -435,7 +435,7 @@ function is_stab($move_type, $pkmn_types)
     $move_type = strtolower($move_type);
 
     foreach ($pkmn_types as $type) {
-        if (strtolower($type['type']['name']) === $move_type) {
+        if (strtolower($type) === $move_type) {
             return true;
         }
     }
