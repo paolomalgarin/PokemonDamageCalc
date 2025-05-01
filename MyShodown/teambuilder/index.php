@@ -1,5 +1,5 @@
 <?php
-require '../public/utils/pkmn_parser.php';
+require '../utils/pkmn_parser.php';
 
 /*
     (Con i \n)
