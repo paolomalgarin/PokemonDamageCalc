@@ -1,52 +1,37 @@
 <?php
-require '../public/utils/calc_stats.php';
 require '../public/utils/calc_damage.php';
-
-/*
-    Altaria @ Heavy-Duty Boots
-    Level: 50
-    EVs: 240 HP / 0 Atk / 252 Def / 0 SpA / 0 SpD / 16 Spe
-    Bold Nature
-    IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
-    - Roost
-    - Perish Song
-    - Defog
-    - Fire Spin
-*/
+require '../public/utils/pkmn_parser.php';
 
 
+$weavile = '
+Weavile (M) @ Cell Battery 
+Level: 100 
+Ability: Pickpocket  
+Tera Type: Dark  
+EVs: 252 Atk / 4 SpD / 252 Spe  
+Jolly Nature  
+- Foul Play  
+- Ice Shard  
+- Icicle Crash  
+- Knock Off
+';
 
-// Esempio: Pikachu (Livello 100) usa Thunderbolt contro Gyarados (Livello 100)
-$damage = calc_generic_damage(
-    $level = 100,
-    $power = 90,
-    $attack_stat = 136, // Attacco Speciale di Pikachu
-    $defense_stat = 236, // Difesa Speciale di Gyarados
-    $type_effectiveness = 2.0, // Elettro vs Acqua/Volante
-    $stab = true, // Thunderbolt è di tipo Elettro (STAB)
-    $critical_multiplier = 1.0, // Nessun colpo critico
-    $other_multipliers = 1.0, // Nessun altro modificatore
-    $random = 1 // Calcola danno massimo
-);
 
-$damage_perc = calc_generic_damage_in_perc(
-    $def_HP = calc_hp(
-        $base_stat = 95,
-        $iv_stat = 31,
-        $ev_stat = 252,  // max ex in una stat (tot evs = 510)
-        $level = 100,
-        $nature_multiplier = 1
-    ),
-    $level = 100,
-    $power = 90,
-    $attack_stat = 120, // Attacco Speciale di Pikachu
-    $defense_stat = 95, // Difesa Speciale di Gyarados
-    $type_effectiveness = 2.0, // Elettro vs Acqua/Volante
-    $stab = true, // Thunderbolt è di tipo Elettro (STAB)
-    $critical_multiplier = 1.0, // Nessun colpo critico
-    $other_multipliers = 1.0, // Nessun altro modificatore
-    $random = 1 // Calcola danno massimo
-);
+// After parsing, check the structure
+$pkmn_atk = parse_to_assoc($weavile);
+$pkmn_def = parse_to_assoc($weavile);
+
+
+// Proceed with calculations if keys are present
+if (isset($pkmn_atk['name'], $pkmn_def['name'])) {
+    $dmg = calc_damage_from_assoc($pkmn_atk, $pkmn_def, 0, 9, 1.0, 1.0, 1.0, false);
+
+    $max_dmg_perc = get_damage_perc(calc_hp_from_assoc($pkmn_def), $dmg['max']);
+    $min_dmg_perc = get_damage_perc(calc_hp_from_assoc($pkmn_def), $dmg['min']);
+} else {
+    die("Error: Pokemon name not parsed correctly.");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,16 +44,9 @@ $damage_perc = calc_generic_damage_in_perc(
 </head>
 
 <body>
-    <?= $damage ?><br>
-    Gyarados HP: <?= calc_hp (
-                        $base_stat = 95,
-                        $iv_stat = 31,
-                        $ev_stat = 252,
-                        $level = 100,
-                        $nature_multiplier = 1
-                    ); ?><br>
-    <br>
-    <?= $damage_perc ?>%<br>
+    <h1>Weavile vs Weavile</h1>
+    Min Damage (Foul Play) <?= $dmg['min'] ?> |  <?= $min_dmg_perc ?>%<br>
+    Max Damage (Foul Play) <?= $dmg['max'] ?> |  <?= $max_dmg_perc ?>%<br>
 </body>
 
 </html>

@@ -15,3 +15,10 @@ function calc_hp($base_hp, $iv_hp, $ev_hp, $level) {
     $hp = floor( ( (2 * $base_hp + $iv_hp + $ev_contribution ) * $level / 100 ) + $level + 10 );
     return $hp;
 }
+
+function calc_hp_from_assoc($pkmn_assoc) {
+    $base_hp = get_base_stat($pkmn_assoc['name'], 0);
+    $ev_contribution = floor($pkmn_assoc['evs']['hp'] / 4);
+    $hp = floor( ( (2 * $base_hp + $pkmn_assoc['ivs']['hp'] + $ev_contribution ) * $pkmn_assoc['level'] / 100 ) + $pkmn_assoc['level'] + 10 );
+    return $hp;
+}
