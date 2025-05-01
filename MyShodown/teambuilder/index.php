@@ -1,19 +1,26 @@
 <?php
 require '../public/utils/pkmn_parser.php';
 
+?>
 
-/*
-    (Con i \n)
+<!DOCTYPE html>
+<html lang="en">
 
-    Araquanid (M) @ Expert Belt  
-    Ability: Water Absorb  
-    Shiny: Yes  
-    Tera Type: Water  
-    EVs: 248 HP / 252 Atk / 8 SpA  
-    Brave Nature  
-    - Body Slam  
-    - Endeavor  
-    - Ice Beam  
-    - Lunge
-*/
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teambuilder</title>
+</head>
 
+<body>
+    <div class="teams_container">
+
+    </div>
+
+    <script src="./cookie_manager.js"></script>
+    <script>
+        
+    </script>
+</body>
+
+</html>
