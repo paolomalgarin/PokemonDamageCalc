@@ -34,3 +34,10 @@
         --t-alt-accent-color: #EC532C80;
     }
 }
+
+
+* {
+    --text-small: 10px;
+    --text-medium: 15px;
+    --text-large: 20px;
+}
