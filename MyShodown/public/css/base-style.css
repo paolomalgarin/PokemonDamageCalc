@@ -8,6 +8,7 @@
     font-family: "Roboto", sans-serif;
 }
 
+.btn-menu,
 .btn {
     --pad: .8em;
     background-color: transparent;
@@ -23,10 +24,14 @@
     user-select: none;
     color: var(--secondary-color);
     transition: all .3s ease;
+    display: block;
+    text-decoration: none;
 
     & .background {
-        --inside-c: var(--alt-primary-color);
-        --border-c: var(--accent-color);
+        --background: var(--alt-primary-color);
+        --border: var(--secondary-color);
+        --border-light: var(--alt-secondary-color);
+
         position: absolute;
         top: 0;
         left: 0;
@@ -34,15 +39,19 @@
         height: 100%;
         pointer-events: none;
         z-index: -1;
+
+        & * {
+            transition: all .3s ease;
+        }
     }
 
 
     &:hover {
-        color: var(--alt-accent-color);
 
         & .background {
-            --inside-c: var(--primary-color);
-            --border-c: var(--alt-accent-color);
+            --background: var(--alt-primary-color);
+            --border: var(--accent-color);
+            --border-light: var(--alt-accent-color);
         }
     }
 }
