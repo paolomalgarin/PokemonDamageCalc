@@ -10,14 +10,14 @@
 
 .btn-menu,
 .btn {
-    --pad: .8em;
+    --pad: 1em;
     background-color: transparent;
     width: fit-content;
     box-sizing: border-box;
-    padding: 5px var(--pad);
+    padding: calc(var(--pad)/2) calc(var(--pad) + 10px);
     text-align: center;
     position: relative;
-    font-size: var(--text-large);
+    font-size: var(--text-medium);
     z-index: 2;
     overflow: visible;
     cursor: pointer;
@@ -39,6 +39,7 @@
         height: 100%;
         pointer-events: none;
         z-index: -1;
+        background-color: transparent;
 
         & * {
             transition: all .3s ease;
