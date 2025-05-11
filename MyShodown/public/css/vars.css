@@ -35,6 +35,16 @@
     }
 }
 
+/* variabili in comune tra i temi */
+:root {
+    --green: #00FF4A;
+    --dark-green: #008C29;
+    --orange: #F7B500;
+    --dark-orange: #9C6310;
+    --red: #E91611;
+    --dark-red: #7C1410;
+}
+
 
 @media screen and (max-width: 430px) {
     * {

@@ -56,3 +56,61 @@
         }
     }
 }
+
+
+
+/* HP INPUT TYPE=RANGE */
+.hp-input-range {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    --fill-percentage: 100%;
+    --light-fill-color: var(--green);
+    --dark-fill-color: var(--dark-green);
+}
+
+.hp-input-range:focus {
+    outline: none;
+}
+
+.hp-input-range::-webkit-slider-runnable-track {
+    background-color: var(--green);
+    background: linear-gradient(0deg,
+            var(--dark-fill-color) 30%,
+            var(--light-fill-color) 31%,
+            var(--light-fill-color) 69%,
+            var(--dark-fill-color) 70%);
+    position: relative;
+}
+
+.hp-input-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--primary-color);
+    border: solid 1px var(--secondary-color);
+    border-radius: 0.5em;
+    height: 1em;
+    width: 1em;
+    position: relative;
+    z-index: 3;
+}
+
+.hp-input-range:focus::-webkit-slider-thumb {
+    outline: 2px solid var(--secondary-color);
+}
+
+.hp-input-range::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: calc(100% - var(--fill-percentage));
+    background: linear-gradient(0deg,
+            var(--alt-primary-color) 30%,
+            var(--primary-color) 31% 69%,
+            var(--alt-primary-color) 70%);
+    pointer-events: none;
+    z-index: 2;
+}

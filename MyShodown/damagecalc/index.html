@@ -9,15 +9,48 @@
     <link rel="shortcut icon" href="../public/img/logo-small.svg" type="image/x-icon">
     <link rel="stylesheet" href="../public/css/base-style.css">
     <link rel="stylesheet" href="../public/css/damagecalc/index.css">
-
-    <style>
+    <style lang="scss">
         body {
-            & main {
-                & .calc_form {
+            main {
+                .calc_form {
                     width: min(95%, 1600px);
-                    background-color: chartreuse;
-                    padding: 10px;
                     box-sizing: border-box;
+                    border-radius: 5px;
+                    border: solid 2px var(--alt-primary-color);
+                    background-color: var(--t-alt-secondary-color);
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    & .pkmn-container {
+                        width: min(100%, 500px);
+                        padding: 10px;
+                        box-sizing: border-box;
+                        background-color: var(--t-primary-color);
+                        border-radius: 2px;
+                        border: solid 2px var(--t-accent-color);
+
+                        & label,
+                        & * label {
+                            background-color: transparent;
+                            color: var(--primary-color);
+                            font-weight: bold;
+                        }
+
+                        & .dropdown {
+                            all: unset;
+                            background-color: var(--alt-primary-color);
+                            padding: 2px;
+                            border-radius: 2px;
+                            border: solid 2px var(--primary-color);
+                            font-size: var(--text-x-small);
+                        }
+
+                        & .hp-input-range {
+                            width: 100%;
+                        }
+                    }
                 }
             }
         }
@@ -27,49 +60,140 @@
 <body>
     <main>
         <div class="calc_form">
+            <div class="pkmn-container">
+                <label for="">Type</label>
+                <input list="brow">
+                <datalist id="brow">
+                    <option value="Internet Explorer">
+                    <option value="Firefox">
+                    <option value="Chrome">
+                    <option value="Opera">
+                    <option value="Safari">
+                </datalist>
 
-            <input type="search" class="browser-search" placeholder="Cerca…">
-            <ul class="results"></ul>
+                <input list="brow">
+                <datalist id="brow">
+                    <option value="Internet Explorer">
+                    <option value="Firefox">
+                    <option value="Chrome">
+                    <option value="Opera">
+                    <option value="Safari">
+                </datalist><br>
 
-            <input type="search" class="browser-search" placeholder="Cerca…">
-            <ul class="results"></ul>
-
-            <input type="search" class="browser-search" placeholder="Cerca…">
-            <ul class="results"></ul>
+                <label for="">Level</label>
+                <input type="text"><br>
 
 
+                <label for="">HP</label>
+                <input type="text"><input type="number"><input type="number"><br>
+
+                <label for="">Attack</label>
+                <input type="text"><input type="number"><input type="number"><br>
+
+                <label for="">Defense</label>
+                <input type="text"><input type="number"><input type="number"><br>
+
+                <label for="">Sp. Atk</label>
+                <input type="text"><input type="number"><input type="number"><br>
+
+                <label for="">Sp. Def</label>
+                <input type="text"><input type="number"><input type="number"><br>
+
+                <label for="">Speed</label>
+                <input type="text"><input type="number"><input type="number"><br>
 
 
+                <label for="">Nature</label>
+                <input list="brow">
+                <datalist id="brow">
+                    <option value="Internet Explorer">
+                    <option value="Firefox">
+                    <option value="Chrome">
+                    <option value="Opera">
+                    <option value="Safari">
+                </datalist><br>
+
+
+                <label for="">Ability</label>
+                <input list="brow">
+                <datalist id="brow">
+                    <option value="Internet Explorer">
+                    <option value="Firefox">
+                    <option value="Chrome">
+                    <option value="Opera">
+                    <option value="Safari">
+                </datalist><br>
+
+                <label for="">Item</label>
+                <input list="brow">
+                <datalist id="brow">
+                    <option value="Internet Explorer">
+                    <option value="Firefox">
+                    <option value="Chrome">
+                    <option value="Opera">
+                    <option value="Safari">
+                </datalist><br>
+
+                <label for="">Status</label>
+                <input list="brow">
+                <datalist id="brow">
+                    <option value="Internet Explorer">
+                    <option value="Firefox">
+                    <option value="Chrome">
+                    <option value="Opera">
+                    <option value="Safari">
+                </datalist><br>
+
+                <div class="info-group">
+                    <label>Current HP</label>
+                    <input class="current-hp calc-trigger" value="341">/<span class="max-hp">197</span> (<input
+                        class="percent-hp calc-trigger" value="100">%)
+                    <br><input class="hp-input-range" type="range" min="0" max="197" step="1" value="714">
+
+                </div>
+            </div>
+
+            <div class="pkmn-container">
+                a
+            </div>
+            <div class="pkmn-container">
+                a
+            </div>
 
             <div class="btn" onclick="alert('Non possiamo ancora calcolare il danno!')">CALC</div>
+        </div>
         </div>
     </main>
 
     <!-- Scripts -->
     <script>
-        const browsers = ["Internet Explorer", "Firefox", "Chrome", "Opera", "Safari"];
-        const inputs = document.querySelectorAll('.browser-search');
+        hpBars = document.querySelectorAll('.hp-input-range');
 
-        inputs.forEach(input => {
-            const list = input.nextElementSibling; // Assume che <ul> venga subito dopo l’input
+        hpBars.forEach(hpBar => {
+            hpBar.addEventListener('input', (e) => {
+                const value = e.target.value;
+                const max = e.target.max || 100; // Default a 100 se manca l'attributo
+                const percentage = (value / max) * 100;
 
-            input.addEventListener('input', () => {
-                const val = input.value.toLowerCase();
-                list.innerHTML = browsers
-                    .filter(b => b.toLowerCase().includes(val))
-                    .map(b => `<li tabindex="0">${b}</li>`)
-                    .join('');
-            });
+                // Aggiorna la CSS variable
+                e.target.style.setProperty('--fill-percentage', percentage + '%');
 
-            list.addEventListener('click', e => {
-                if (e.target.matches('li')) {
-                    input.value = e.target.textContent;
-                    list.innerHTML = '';
+                // setto il colore
+                if (percentage < 50) {
+                    if (percentage < 25) {
+                        e.target.style.setProperty('--light-fill-color', 'var(--red)');
+                        e.target.style.setProperty('--dark-fill-color', 'var(--dark-red)');
+                    } else {
+                        e.target.style.setProperty('--light-fill-color', 'var(--orange)');
+                        e.target.style.setProperty('--dark-fill-color', 'var(--dark-orange)');
+                    }
+                } else {
+                    e.target.style.setProperty('--light-fill-color', 'var(--green)');
+                    e.target.style.setProperty('--dark-fill-color', 'var(--dark-green)');
                 }
             });
         });
     </script>
-
     <script src="../public/js/button_gui.js"></script>
 </body>
 
