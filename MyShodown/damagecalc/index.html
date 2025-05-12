@@ -16,39 +16,41 @@
                     width: min(95%, 1600px);
                     box-sizing: border-box;
                     border-radius: 5px;
-                    border: solid 2px var(--alt-primary-color);
-                    background-color: var(--t-alt-secondary-color);
+                    border: solid 2px var(--t-alt-secondary-color);
+                    background-color: var(--primary-color);
                     display: flex;
+                    flex-direction: column;
                     flex-wrap: wrap;
                     align-items: center;
                     justify-content: space-between;
+                    gap: 10px;
 
-                    & .pkmn-container {
-                        width: min(100%, 500px);
-                        padding: 10px;
-                        box-sizing: border-box;
-                        background-color: var(--t-primary-color);
-                        border-radius: 2px;
-                        border: solid 2px var(--t-accent-color);
+                    & .option-container {
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
 
-                        & label,
-                        & * label {
-                            background-color: transparent;
-                            color: var(--primary-color);
-                            font-weight: bold;
-                        }
-
-                        & .dropdown {
-                            all: unset;
-                            background-color: var(--alt-primary-color);
-                            padding: 2px;
+                        & .pkmn-container {
+                            width: min(100%, 500px);
+                            padding: 10px;
+                            box-sizing: border-box;
+                            background-color: var(--t-primary-color);
                             border-radius: 2px;
-                            border: solid 2px var(--primary-color);
-                            font-size: var(--text-x-small);
+                            border: solid 2px var(--t-accent-color);
+                            color: var(--primary-color);
+                            /* font-size: var(--text-small); */
                         }
 
-                        & .hp-input-range {
-                            width: 100%;
+                        & #field-options-container {
+                            width: min(100%, 300px);
+                            padding: 10px;
+                            box-sizing: border-box;
+                            background-color: var(--t-primary-color);
+                            border-radius: 2px;
+                            border: solid 2px var(--t-accent-color);
                         }
                     }
                 }
@@ -60,140 +62,41 @@
 <body>
     <main>
         <div class="calc_form">
-            <div class="pkmn-container">
-                <label for="">Type</label>
-                <input list="brow">
-                <datalist id="brow">
-                    <option value="Internet Explorer">
-                    <option value="Firefox">
-                    <option value="Chrome">
-                    <option value="Opera">
-                    <option value="Safari">
-                </datalist>
-
-                <input list="brow">
-                <datalist id="brow">
-                    <option value="Internet Explorer">
-                    <option value="Firefox">
-                    <option value="Chrome">
-                    <option value="Opera">
-                    <option value="Safari">
-                </datalist><br>
-
-                <label for="">Level</label>
-                <input type="text"><br>
-
-
-                <label for="">HP</label>
-                <input type="text"><input type="number"><input type="number"><br>
-
-                <label for="">Attack</label>
-                <input type="text"><input type="number"><input type="number"><br>
-
-                <label for="">Defense</label>
-                <input type="text"><input type="number"><input type="number"><br>
-
-                <label for="">Sp. Atk</label>
-                <input type="text"><input type="number"><input type="number"><br>
-
-                <label for="">Sp. Def</label>
-                <input type="text"><input type="number"><input type="number"><br>
-
-                <label for="">Speed</label>
-                <input type="text"><input type="number"><input type="number"><br>
-
-
-                <label for="">Nature</label>
-                <input list="brow">
-                <datalist id="brow">
-                    <option value="Internet Explorer">
-                    <option value="Firefox">
-                    <option value="Chrome">
-                    <option value="Opera">
-                    <option value="Safari">
-                </datalist><br>
-
-
-                <label for="">Ability</label>
-                <input list="brow">
-                <datalist id="brow">
-                    <option value="Internet Explorer">
-                    <option value="Firefox">
-                    <option value="Chrome">
-                    <option value="Opera">
-                    <option value="Safari">
-                </datalist><br>
-
-                <label for="">Item</label>
-                <input list="brow">
-                <datalist id="brow">
-                    <option value="Internet Explorer">
-                    <option value="Firefox">
-                    <option value="Chrome">
-                    <option value="Opera">
-                    <option value="Safari">
-                </datalist><br>
-
-                <label for="">Status</label>
-                <input list="brow">
-                <datalist id="brow">
-                    <option value="Internet Explorer">
-                    <option value="Firefox">
-                    <option value="Chrome">
-                    <option value="Opera">
-                    <option value="Safari">
-                </datalist><br>
-
-                <div class="info-group">
-                    <label>Current HP</label>
-                    <input class="current-hp calc-trigger" value="341">/<span class="max-hp">197</span> (<input
-                        class="percent-hp calc-trigger" value="100">%)
-                    <br><input class="hp-input-range" type="range" min="0" max="197" step="1" value="714">
-
+            <div class="option-container">
+                <div id="pkmn-container-1" class="pkmn-container">
+                    <input type="range" class="hp-input-range" min="0" max="100" value="100" step="1" id="hp-bar-1">
+                </div>
+                <div id="field-options-container"></div>
+                <div id="pkmn-container-2" class="pkmn-container">
+                    <h1>${title}</h1>
+                    <div class="pkmn-select"></div>
+                    <div class="type"></div>
+                    <div class="level"><label for="${structureId}-level">Level </label><input type="number" id="${structureId}-level" min="0" max="100" value="100"></div>
+                    <div class="stats" id="${structureId}-stats"></div>
                 </div>
             </div>
 
-            <div class="pkmn-container">
-                a
+            <!-- OPERAZIONI (Calcola reset ...) -->
+            <div class="operations">
+                <div class="btn" onclick="alert('Non possiamo ancora calcolare il danno!')">CALC</div>
             </div>
-            <div class="pkmn-container">
-                a
-            </div>
-
-            <div class="btn" onclick="alert('Non possiamo ancora calcolare il danno!')">CALC</div>
         </div>
         </div>
     </main>
 
     <!-- Scripts -->
+    <script src="./script.js"></script>
     <script>
-        hpBars = document.querySelectorAll('.hp-input-range');
+        const pkmnContainer1 = document.getElementById('pkmn-container-1');
+        const pkmnContainer2 = document.getElementById('pkmn-container-2');
 
-        hpBars.forEach(hpBar => {
-            hpBar.addEventListener('input', (e) => {
-                const value = e.target.value;
-                const max = e.target.max || 100; // Default a 100 se manca l'attributo
-                const percentage = (value / max) * 100;
+        // appendList('brow1', ['Internet Explorer', 'Firefox', 'Chrome', 'Opera', 'Safari'], pkmnContainer2, 'Type');
+        // appendList('brow2', ['Internet Explorer', 'Firefox', 'Chrome', 'Opera', 'Safari'], pkmnContainer2, 'Type');
+        // appendList('brow3', ['Internet Explorer', 'Firefox', 'Chrome', 'Opera', 'Safari'], pkmnContainer2, 'Type');
 
-                // Aggiorna la CSS variable
-                e.target.style.setProperty('--fill-percentage', percentage + '%');
-
-                // setto il colore
-                if (percentage < 50) {
-                    if (percentage < 25) {
-                        e.target.style.setProperty('--light-fill-color', 'var(--red)');
-                        e.target.style.setProperty('--dark-fill-color', 'var(--dark-red)');
-                    } else {
-                        e.target.style.setProperty('--light-fill-color', 'var(--orange)');
-                        e.target.style.setProperty('--dark-fill-color', 'var(--dark-orange)');
-                    }
-                } else {
-                    e.target.style.setProperty('--light-fill-color', 'var(--green)');
-                    e.target.style.setProperty('--dark-fill-color', 'var(--dark-green)');
-                }
-            });
-        });
+        // createPkmnContainerStructure(pkmnContainer2, 'pkmn2', 'Pokemon 2', 'Abomasnow');
     </script>
+    <script src="../public/js/damagecalc/hpBar.js"></script>
     <script src="../public/js/button_gui.js"></script>
 </body>
 
