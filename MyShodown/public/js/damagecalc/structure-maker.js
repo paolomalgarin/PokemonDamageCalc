@@ -1,5 +1,3 @@
-// TODO rinomina il file con un nome sensato e mettilo in public/js
-
 function appendList(listId, options, rootElement, label = null) {
     const container = document.createElement('div');
     container.className = 'custom-select';
@@ -75,9 +73,6 @@ function appendList(listId, options, rootElement, label = null) {
 }
 
 
-
-
-
 function insertStats(rootElement, structureId, stats) {
     rootElement.innerHTML = `
     <div class="stats">
@@ -93,7 +88,7 @@ function insertStats(rootElement, structureId, stats) {
             </thead>
             <tr>
                 <td>HP</td>
-                <td><input type="text" id="${structureId}-hp-bs" value="${stats.hp}"></td>
+                <td><input type="number" id="${structureId}-hp-bs" value="${stats.hp}"></td>
                 <td><input type="number" min="0" max="31" value="31"></td>
                 <td><input type="number" min="0" max="252" value="0"></td>
                 <td>0</td> <!-- calcolo di base, ivs e evs -->
@@ -102,7 +97,7 @@ function insertStats(rootElement, structureId, stats) {
             </tr>
             <tr>
                 <td>Attack</td>
-                <td><input type="text" id="${structureId}-atk-bs" value="${stats.atk}"></td>
+                <td><input type="number" id="${structureId}-atk-bs" value="${stats.atk}"></td>
                 <td><input type="number" min="0" max="31" value="31"></td>
                 <td><input type="number" min="0" max="252" value="0"></td>
                 <td>0</td> <!-- calcolo di base, ivs e evs -->
@@ -125,7 +120,7 @@ function insertStats(rootElement, structureId, stats) {
             </tr>
             <tr>
                 <td>Defense</td>
-                <td><input type="text" id="${structureId}-def-bs" value="${stats.def}"></td>
+                <td><input type="number" id="${structureId}-def-bs" value="${stats.def}"></td>
                 <td><input type="number" min="0" max="31" value="31"></td>
                 <td><input type="number" min="0" max="252" value="0"></td>
                 <td>0</td> <!-- calcolo di base, ivs e evs -->
@@ -148,7 +143,7 @@ function insertStats(rootElement, structureId, stats) {
             </tr>
             <tr>
                 <td>Sp. Atk</td>
-                <td><input type="text" id="${structureId}-spa-bs" value="${stats.spa}"></td>
+                <td><input type="number" id="${structureId}-spa-bs" value="${stats.spa}"></td>
                 <td><input type="number" min="0" max="31" value="31"></td>
                 <td><input type="number" min="0" max="252" value="0"></td>
                 <td>0</td> <!-- calcolo di base, ivs e evs -->
@@ -171,7 +166,7 @@ function insertStats(rootElement, structureId, stats) {
             </tr>
             <tr>
                 <td>Sp. Def</td>
-                <td><input type="text" id="${structureId}-spd-bs" value="${stats.spd}"></td>
+                <td><input type="number" id="${structureId}-spd-bs" value="${stats.spd}"></td>
                 <td><input type="number" min="0" max="31" value="31"></td>
                 <td><input type="number" min="0" max="252" value="0"></td>
                 <td>0</td> <!-- calcolo di base, ivs e evs -->
@@ -194,7 +189,7 @@ function insertStats(rootElement, structureId, stats) {
             </tr>
             <tr>
                 <td>Speed</td>
-                <td><input type="text" id="${structureId}-spe-bs" value="${stats.spe}"></td>
+                <td><input type="number" id="${structureId}-spe-bs" value="${stats.spe}"></td>
                 <td><input type="number" min="0" max="31" value="31"></td>
                 <td><input type="number" min="0" max="252" value="0"></td>
                 <td>0</td> <!-- calcolo di base, ivs e evs -->
@@ -215,19 +210,55 @@ function insertStats(rootElement, structureId, stats) {
                     </select></td>
                 <td>0</td> <!-- calcolo di base, ivs e evs e multiplier -->
             </tr>
+            <tr>
+                <td>Total</td>
+                <td></td>
+                <td></td>
+                <td>0</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
         </table>
     </div>
     `;
 }
 
+function addBarInteractions(bar) {
+    // Aggiungi interazioni al range
+}
 
-function createPkmnContainerStructure(rootElement, structureId, title, pkmnName) {
+function insertHealth(rootElement, structureId, maxHP) {
+    rootElement.innerHTML = `
+    <label for="${structureId}-hp-bar">Current HP </label><input type="number" id="${structureId}-hp" min="0" max="${maxHP}" value="${maxHP}">/${maxHP} (<span class="hp-percentage">100%</span>)
+    <input type="range" class="hp-input-range" min="0" max="100" value="100" step="1" id="${structureId}-hp-bar">
+    `;
+
+    // Aggiungi interazioni al range
+    addBarInteractions(document.getElementById(`${structureId}-hp-bar`));
+}
+
+
+function insertMoves(rootElement, structureId, moves) {
+    rootElement.innerHTML = `
+    `;
+}
+
+
+// funzione di base da modificare in base alla gen
+function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, pkmnName) {
     rootElement.innerHTML = `
         <h1>${title}</h1>
-        <div class="pkmn-select"></div>
-        <div class="type"></div>
+        <div class="pkmn-select" id="${structureId}-pkmn-select"></div>
+        <div class="type" id="${structureId}-type"></div>
         <div class="level"><label for="${structureId}-level">Level </label><input type="number" id="${structureId}-level" min="0" max="100" value="100"></div>
         <div class="stats" id="${structureId}-stats"></div>
+        <div class="nature" id="${structureId}-nature"></div>
+        <div class="ability" id="${structureId}-ability"></div>
+        <div class="item" id="${structureId}-item"></div>
+        <div class="status" id="${structureId}-status"></div>
+        <div class="health" id="${structureId}-health"></div>
+        <div class="moves-container" id="${structureId}-moves-container"></div>
     `;
 
 
@@ -239,5 +270,22 @@ function createPkmnContainerStructure(rootElement, structureId, title, pkmnName)
         spd: 100,
         spe: 100
     };
+    const types = ['???', 'Normal', 'Fire', 'Water', 'Grass', 'Electric', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Steel', 'Dragon', 'Dark', 'Fairy'];
+
+
+    appendList(`${structureId}-pkmn`, [pkmnName], document.getElementById(`${structureId}-pkmn-select`), 'Pokemon');
+
+    appendList(`${structureId}-type-1`, types, document.getElementById(`${structureId}-type`), 'Types ');
+    appendList(`${structureId}-type-2`, ['(none)', ...types], document.getElementById(`${structureId}-type`));
+
     insertStats(document.getElementById(`${structureId}-stats`), structureId, stats);
+
+    appendList(`${structureId}-nature-select`, ['?'], document.getElementById(`${structureId}-nature`), 'Nature');
+    appendList(`${structureId}-ability-select`, ['?'], document.getElementById(`${structureId}-ability`), 'Ability');
+    appendList(`${structureId}-item-select`, ['(none)'], document.getElementById(`${structureId}-item`), 'Item');
+    appendList(`${structureId}-status-select`, ['Healthy', 'Poisoned', 'Badly Poisoned', 'Burned', 'Paralyzed', 'Asleep', 'Frozen'], document.getElementById(`${structureId}-status`), 'Status');
+
+    insertHealth(document.getElementById(`${structureId}-health`), structureId, 324);
+
+    insertMoves(document.getElementById(`${structureId}-moves-container`), structureId, 324);
 }

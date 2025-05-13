@@ -24,6 +24,7 @@
                     align-items: center;
                     justify-content: space-between;
                     gap: 10px;
+                    padding: 10px;
 
                     & .option-container {
                         display: flex;
@@ -71,7 +72,8 @@
                     <h1>${title}</h1>
                     <div class="pkmn-select"></div>
                     <div class="type"></div>
-                    <div class="level"><label for="${structureId}-level">Level </label><input type="number" id="${structureId}-level" min="0" max="100" value="100"></div>
+                    <div class="level"><label for="${structureId}-level">Level </label><input type="number"
+                            id="${structureId}-level" min="0" max="100" value="100"></div>
                     <div class="stats" id="${structureId}-stats"></div>
                 </div>
             </div>
@@ -85,19 +87,19 @@
     </main>
 
     <!-- Scripts -->
-    <script src="./script.js"></script>
+    <script src="../public/js/button_gui.js"></script>
+    <script src="../public/js/damagecalc/hpBar.js"></script>
+    <script src="../public/js/damagecalc/structure-maker.js"></script>
     <script>
         const pkmnContainer1 = document.getElementById('pkmn-container-1');
         const pkmnContainer2 = document.getElementById('pkmn-container-2');
 
-        // appendList('brow1', ['Internet Explorer', 'Firefox', 'Chrome', 'Opera', 'Safari'], pkmnContainer2, 'Type');
-        // appendList('brow2', ['Internet Explorer', 'Firefox', 'Chrome', 'Opera', 'Safari'], pkmnContainer2, 'Type');
-        // appendList('brow3', ['Internet Explorer', 'Firefox', 'Chrome', 'Opera', 'Safari'], pkmnContainer2, 'Type');
+        createPkmnContainerStructure_GENERIC(pkmnContainer1, 'pkmn1', 'Pokemon 1', 'Abomasnow');
+        createPkmnContainerStructure_GENERIC(pkmnContainer2, 'pkmn2', 'Pokemon 2', 'Abomasnow');
 
-        // createPkmnContainerStructure(pkmnContainer2, 'pkmn2', 'Pokemon 2', 'Abomasnow');
+
+        initializeHPBars();
     </script>
-    <script src="../public/js/damagecalc/hpBar.js"></script>
-    <script src="../public/js/button_gui.js"></script>
 </body>
 
 </html>

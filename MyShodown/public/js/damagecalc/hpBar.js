@@ -1,7 +1,13 @@
+// Funzione per inizializzare le barre HP
+const initializeHPBars = () => {
+    let hpBars = document.querySelectorAll('.hp-input-range');
 
-hpBars = document.querySelectorAll('.hp-input-range');
+    hpBars.forEach(hpBar => {
+        addBarResponsiveStyle(hpBar);
+    });
+};
 
-hpBars.forEach(hpBar => {
+const addBarResponsiveStyle = (hpBar) => {
     hpBar.addEventListener('input', (e) => {
         const value = e.target.value;
         const max = e.target.max || 100; // Default a 100 se manca l'attributo
@@ -12,7 +18,7 @@ hpBars.forEach(hpBar => {
 
         // setto il colore
         if (percentage < 50) {
-            if (percentage < 25) {
+            if (percentage < 20) {
                 e.target.style.setProperty('--light-fill-color', 'var(--red)');
                 e.target.style.setProperty('--dark-fill-color', 'var(--dark-red)');
             } else {
@@ -24,4 +30,7 @@ hpBars.forEach(hpBar => {
             e.target.style.setProperty('--dark-fill-color', 'var(--dark-green)');
         }
     });
-});
+}
+
+
+initializeHPBars();
