@@ -224,37 +224,77 @@ function insertStats(rootElement, structureId, stats) {
     `;
 }
 
-function addBarInteractions(barElement, maxHP) {
-    const hpInput = document.getElementById(barElement.id.replace('-bar', ''));
-    const hpPercentage = barElement.parentElement.querySelector('.hp-percentage');
+function addBarInteractions(barElement, maxHP, structureId) {
+    const hpInput = document.getElementById(`${structureId}-hp`);
+    const hpPercentage = document.getElementById(`${structureId}-hp-percentage`);
 
     // Da barra a input/percentuale
-    barElement.addEventListener('input', () => {
+    barElement.addEventListener('change', (e) => {
+        // parte di stile
+        const value = e.target.value;
+        const max = e.target.max || 100; // Default a 100 se manca l'attributo
+        const percentage = (value / max) * 100;
+
+        // Aggiorna la CSS variable
+        e.target.style.setProperty('--fill-percentage', percentage + '%');
+
+        // setto il colore
+        if (percentage < 50) {
+            if (percentage < 20) {
+                e.target.style.setProperty('--light-fill-color', 'var(--red)');
+                e.target.style.setProperty('--dark-fill-color', 'var(--dark-red)');
+            } else {
+                e.target.style.setProperty('--light-fill-color', 'var(--orange)');
+                e.target.style.setProperty('--dark-fill-color', 'var(--dark-orange)');
+            }
+        } else {
+            e.target.style.setProperty('--light-fill-color', 'var(--green)');
+            e.target.style.setProperty('--dark-fill-color', 'var(--dark-green)');
+        }
+
+        // conti
         const percent = parseInt(barElement.value);
         const currentHP = Math.round((percent / 100) * maxHP);
-        
+
         hpInput.value = currentHP;
         hpPercentage.textContent = `${percent}%`;
     });
 
     // Da input a barra/percentuale
-    hpInput.addEventListener('input', () => {
+    hpInput.addEventListener('change', () => {
         let currentHP = Math.min(maxHP, Math.max(0, parseInt(hpInput.value) || 0));
-        const percent = Math.round((currentHP / maxHP) * 100);
-        
-        barElement.value = percent;
+        const percent = Math.round((currentHP / maxHP));
+
+        barElement.value = currentHP;
         hpPercentage.textContent = `${percent}%`;
+
+        // Aggiorna la CSS variable
+        barElement.style.setProperty('--fill-percentage', percent + '%');
+
+        // setto il colore
+        if (percent < 50) {
+            if (percent < 20) {
+                barElement.style.setProperty('--light-fill-color', 'var(--red)');
+                barElement.style.setProperty('--dark-fill-color', 'var(--dark-red)');
+            } else {
+                barElement.style.setProperty('--light-fill-color', 'var(--orange)');
+                barElement.style.setProperty('--dark-fill-color', 'var(--dark-orange)');
+            }
+        } else {
+            barElement.style.setProperty('--light-fill-color', 'var(--green)');
+            barElement.style.setProperty('--dark-fill-color', 'var(--dark-green)');
+        }
     });
 }
 
 function insertHealth(rootElement, structureId, maxHP) {
     rootElement.innerHTML = `
-    <label for="${structureId}-hp-bar">Current HP </label><input type="number" id="${structureId}-hp" min="0" max="${maxHP}" value="${maxHP}">/${maxHP} (<span class="hp-percentage">100%</span>)
-    <input type="range" class="hp-input-range" min="0" max="100" value="100" step="1" id="${structureId}-hp-bar">
+    <label for="${structureId}-hp-bar">Current HP </label><input type="number" id="${structureId}-hp" min="0" max="${maxHP}" value="${maxHP}">/${maxHP} (<span class="hp-percentage" id="${structureId}-hp-percentage">100%</span>)
+    <input type="range" class="hp-input-range" min="0" max="${maxHP}" value="${maxHP}" step="1" id="${structureId}-hp-bar">
     `;
 
     // Aggiungi interazioni al range
-    addBarInteractions(document.getElementById(`${structureId}-hp-bar`),324);
+    addBarInteractions(document.getElementById(`${structureId}-hp-bar`), maxHP, structureId);
 }
 
 
