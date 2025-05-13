@@ -1,0 +1,61 @@
+body {
+    main {
+        .calc_form {
+            width: min(95%, 1600px);
+            box-sizing: border-box;
+            border-radius: 5px;
+            border: solid 2px var(--t-alt-secondary-color);
+            background-color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px;
+
+            & .option-container {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+
+                & .pkmn-container {
+                    width: min(100%, 500px);
+                    padding: 10px;
+                    box-sizing: border-box;
+                    border-radius: 2px;
+                    border: solid 2px var(--t-accent-color);
+                    color: var(--primary-color);
+                    font-size: var(--text-x-small);
+
+                    & input,
+                    & select {
+                        background-color: var(--t-alt-primary-color);
+                    }
+
+                    & .moves-container {
+                        & .move-container {
+                            display: flex;
+
+                            & input[type='number'] {
+                                width: 3rem;
+                            }
+                        }
+                    }
+                }
+
+                & #field-options-container {
+                    width: min(100%, 300px);
+                    padding: 10px;
+                    box-sizing: border-box;
+                    background-color: var(--t-primary-color);
+                    border-radius: 2px;
+                    border: solid 2px var(--t-accent-color);
+                }
+            }
+        }
+    }
+}

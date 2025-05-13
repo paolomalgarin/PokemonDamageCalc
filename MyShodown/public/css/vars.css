@@ -1,7 +1,7 @@
 @media (prefers-color-scheme: dark) {
     :root {
         --primary-color: #1d2020;
-        --alt-primary-color: #323033;
+        --alt-primary-color: #121112;
         --secondary-color: #DBDBDB;
         --alt-secondary-color: #F8F8F8;
         --accent-color: #00A3FF;
@@ -9,7 +9,7 @@
 
 
         --t-primary-color: #1d202080;
-        --t-alt-primary-color: #32303380;
+        --t-alt-primary-color: #12111280;
         --t-secondary-color: #DBDBDB80;
         --t-alt-secondary-color: #F8F8F880;
         --t-accent-color: #00A3FF80;
@@ -21,7 +21,7 @@
     :root {
         --primary-color: #F8F8F8;
         --alt-primary-color: #DBDBDB;
-        --secondary-color: #323033;
+        --secondary-color: #121112;
         --alt-secondary-color: #101211;
         --accent-color: #EE6644;
         --alt-accent-color: #EC532C;
@@ -29,7 +29,7 @@
         --t-primary-color: #F8F8F880;
         --t-alt-primary-color: #DBDBDB80;
         --t-secondary-color: #32303380;
-        --t-alt-secondary-color: #10121180;
+        --t-alt-secondary-color: #12111280;
         --t-accent-color: #EE664480;
         --t-alt-accent-color: #EC532C80;
     }

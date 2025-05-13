@@ -9,55 +9,6 @@
     <link rel="shortcut icon" href="../public/img/logo-small.svg" type="image/x-icon">
     <link rel="stylesheet" href="../public/css/base-style.css">
     <link rel="stylesheet" href="../public/css/damagecalc/index.css">
-    <style lang="scss">
-        body {
-            main {
-                .calc_form {
-                    width: min(95%, 1600px);
-                    box-sizing: border-box;
-                    border-radius: 5px;
-                    border: solid 2px var(--t-alt-secondary-color);
-                    background-color: var(--primary-color);
-                    display: flex;
-                    flex-direction: column;
-                    flex-wrap: wrap;
-                    align-items: center;
-                    justify-content: space-between;
-                    gap: 10px;
-                    padding: 10px;
-
-                    & .option-container {
-                        display: flex;
-                        flex-direction: row;
-                        flex-wrap: wrap;
-                        align-items: center;
-                        justify-content: space-between;
-                        width: 100%;
-
-                        & .pkmn-container {
-                            width: min(100%, 500px);
-                            padding: 10px;
-                            box-sizing: border-box;
-                            background-color: var(--t-primary-color);
-                            border-radius: 2px;
-                            border: solid 2px var(--t-accent-color);
-                            color: var(--primary-color);
-                            /* font-size: var(--text-small); */
-                        }
-
-                        & #field-options-container {
-                            width: min(100%, 300px);
-                            padding: 10px;
-                            box-sizing: border-box;
-                            background-color: var(--t-primary-color);
-                            border-radius: 2px;
-                            border: solid 2px var(--t-accent-color);
-                        }
-                    }
-                }
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -76,10 +27,9 @@
         </div>
         </div>
     </main>
-
+    
     <!-- Scripts -->
     <script src="../public/js/button_gui.js"></script>
-    <script src="../public/js/damagecalc/hpBar.js"></script>
     <script src="../public/js/damagecalc/structure-maker.js"></script>
     <script>
         const pkmnContainer1 = document.getElementById('pkmn-container-1');
@@ -87,9 +37,6 @@
 
         createPkmnContainerStructure_GENERIC(pkmnContainer1, 'pkmn1', 'Pokemon 1', 'Abomasnow');
         createPkmnContainerStructure_GENERIC(pkmnContainer2, 'pkmn2', 'Pokemon 2', 'Abomasnow');
-
-
-        initializeHPBars();
     </script>
 </body>
 

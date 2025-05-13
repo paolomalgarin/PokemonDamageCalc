@@ -1,4 +1,4 @@
-function appendList(listId, options, rootElement, label = null) {
+function appendList(listId, options, rootElement, label = null, selected = null) {
     const container = document.createElement('div');
     container.className = 'custom-select';
 
@@ -8,7 +8,7 @@ function appendList(listId, options, rootElement, label = null) {
 
     container.innerHTML = `
         <div class="selected-option">
-            <span id="${valueId}">${options[0]}</span>
+            <span id="${valueId}">${selected ? selected : options[0]}</span>
         </div>
         <div class="dropdown-content" id="${dropdownId}">
             <input type="text" 
@@ -229,7 +229,7 @@ function addBarInteractions(barElement, maxHP, structureId) {
     const hpPercentage = document.getElementById(`${structureId}-hp-percentage`);
 
     // Da barra a input/percentuale
-    barElement.addEventListener('change', (e) => {
+    barElement.addEventListener('input', (e) => {
         // parte di stile
         const value = e.target.value;
         const max = e.target.max || 100; // Default a 100 se manca l'attributo
@@ -298,9 +298,30 @@ function insertHealth(rootElement, structureId, maxHP) {
 }
 
 
-function insertMoves(rootElement, structureId, moves) {
-    rootElement.innerHTML = `
-    `;
+function insertMoves(rootElement, structureId, moves, all_moves, types) {
+
+    moves.forEach((move, index) => {
+        moveDiv = document.createElement('div');
+        moveDiv.classList = 'move-container';
+        moveDiv.id = `${structureId}-move-${index}-container`;
+
+        // popolo il div
+        appendList(`${structureId}-move-${index}`, all_moves, moveDiv, null, move.name);
+        moveDiv.insertAdjacentHTML('beforeend', `
+        <input type="number" id="${structureId}-move-bsp-${index}" value="${move.bsp}">
+        `);
+        appendList(`${structureId}-move-type-${index}`, types, moveDiv, null, move.type);
+        moveDiv.insertAdjacentHTML('beforeend', `
+        <select id="${structureId}-move-category-${index}">
+            <option ${move.category == 'physical' ? 'selected' : ''}>physical</option>
+            <option ${move.category == 'special' ? 'selected' : ''}>special</option>
+        </select>
+        <input type="checkbox" id="${structureId}-move-iscrit-${index}" style="display: none;"><label for="${structureId}-move-iscrit-${index}" class="crit-btn">crit</label>
+        `);
+
+        // aggiungo al dom
+        rootElement.appendChild(moveDiv);
+    });
 }
 
 
@@ -330,7 +351,32 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
         spe: 100
     };
     const types = ['???', 'Normal', 'Fire', 'Water', 'Grass', 'Electric', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Steel', 'Dragon', 'Dark', 'Fairy'];
-
+    const moves = [
+        {
+            name: 'blizzard',
+            bsp: 110,
+            type: 'ice',
+            category: 'special'
+        },
+        {
+            name: 'blizzard',
+            bsp: 110,
+            type: 'ice',
+            category: 'physical'
+        },
+        {
+            name: 'blizzard',
+            bsp: 110,
+            type: 'ice',
+            category: 'special'
+        },
+        {
+            name: 'blizzard',
+            bsp: 110,
+            type: 'ice',
+            category: 'special'
+        },
+    ];
 
     appendList(`${structureId}-pkmn`, [pkmnName], document.getElementById(`${structureId}-pkmn-select`), 'Pokemon');
 
@@ -346,5 +392,5 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
 
     insertHealth(document.getElementById(`${structureId}-health`), structureId, 324);
 
-    insertMoves(document.getElementById(`${structureId}-moves-container`), structureId, 324);
+    insertMoves(document.getElementById(`${structureId}-moves-container`), structureId, moves, [], types);
 }
