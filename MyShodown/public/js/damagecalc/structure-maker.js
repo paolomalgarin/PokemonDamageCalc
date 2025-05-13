@@ -253,7 +253,7 @@ function addBarInteractions(barElement, maxHP, structureId) {
         }
 
         // conti
-        const percent = parseInt(barElement.value);
+        const percent = Math.round(parseInt(barElement.value) / maxHP * 100);
         const currentHP = Math.round((percent / 100) * maxHP);
 
         hpInput.value = currentHP;
@@ -263,7 +263,7 @@ function addBarInteractions(barElement, maxHP, structureId) {
     // Da input a barra/percentuale
     hpInput.addEventListener('change', () => {
         let currentHP = Math.min(maxHP, Math.max(0, parseInt(hpInput.value) || 0));
-        const percent = Math.round((currentHP / maxHP));
+        const percent = Math.round(currentHP / maxHP * 100);
 
         barElement.value = currentHP;
         hpPercentage.textContent = `${percent}%`;
