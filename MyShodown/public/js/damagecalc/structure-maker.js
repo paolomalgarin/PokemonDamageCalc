@@ -224,8 +224,27 @@ function insertStats(rootElement, structureId, stats) {
     `;
 }
 
-function addBarInteractions(bar) {
-    // Aggiungi interazioni al range
+function addBarInteractions(barElement, maxHP) {
+    const hpInput = document.getElementById(barElement.id.replace('-bar', ''));
+    const hpPercentage = barElement.parentElement.querySelector('.hp-percentage');
+
+    // Da barra a input/percentuale
+    barElement.addEventListener('input', () => {
+        const percent = parseInt(barElement.value);
+        const currentHP = Math.round((percent / 100) * maxHP);
+        
+        hpInput.value = currentHP;
+        hpPercentage.textContent = `${percent}%`;
+    });
+
+    // Da input a barra/percentuale
+    hpInput.addEventListener('input', () => {
+        let currentHP = Math.min(maxHP, Math.max(0, parseInt(hpInput.value) || 0));
+        const percent = Math.round((currentHP / maxHP) * 100);
+        
+        barElement.value = percent;
+        hpPercentage.textContent = `${percent}%`;
+    });
 }
 
 function insertHealth(rootElement, structureId, maxHP) {
@@ -235,7 +254,7 @@ function insertHealth(rootElement, structureId, maxHP) {
     `;
 
     // Aggiungi interazioni al range
-    addBarInteractions(document.getElementById(`${structureId}-hp-bar`));
+    addBarInteractions(document.getElementById(`${structureId}-hp-bar`),324);
 }
 
 
