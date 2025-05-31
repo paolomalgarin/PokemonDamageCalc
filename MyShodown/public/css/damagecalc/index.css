@@ -1,5 +1,10 @@
 body {
     main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+
         .calc_form {
             width: min(95%, 1600px);
             box-sizing: border-box;
@@ -30,6 +35,13 @@ body {
                     border: solid 2px var(--t-accent-color);
                     color: var(--primary-color);
                     font-size: var(--text-x-small);
+                    position: relative;
+
+                    & .pkmn-sprite {
+                        position: absolute;
+                        right: 2px;
+                        top: 2px;
+                    }
 
                     & input,
                     & select {

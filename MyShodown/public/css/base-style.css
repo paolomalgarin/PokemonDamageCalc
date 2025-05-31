@@ -13,6 +13,12 @@ body {
     background-color: var(--alt-primary-color);
 }
 
+* {
+    &::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
 .btn-menu,
 .btn {
     --pad: 1em;
@@ -153,6 +159,8 @@ body {
         border: 1px solid var(--t-secondary-color);
         background: var(--primary-color);
         z-index: 100;
+        overflow-y: scroll;
+        max-height: 200px;
 
         & .dropdown-input {
             border: none;
