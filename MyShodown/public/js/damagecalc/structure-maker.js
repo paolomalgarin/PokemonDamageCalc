@@ -1,3 +1,35 @@
+// Add at top of file
+const STAT_DISPLAY_NAMES = {
+    'atk': 'Atk',
+    'def': 'Def',
+    'spa': 'SpA',
+    'spd': 'SpD',
+    'spe': 'Spe'
+};
+
+const NATURE_EFFECTS = {
+    "Adamant": { plus: 'atk', minus: 'spa' },
+    "Bold": { plus: 'def', minus: 'atk' },
+    "Brave": { plus: 'atk', minus: 'spe' },
+    "Calm": { plus: 'spd', minus: 'atk' },
+    "Careful": { plus: 'spd', minus: 'spa' },
+    "Gentle": { plus: 'spd', minus: 'def' },
+    "Hasty": { plus: 'spe', minus: 'def' },
+    "Impish": { plus: 'def', minus: 'spa' },
+    "Jolly": { plus: 'spe', minus: 'spa' },
+    "Lax": { plus: 'def', minus: 'spd' },
+    "Lonely": { plus: 'atk', minus: 'def' },
+    "Mild": { plus: 'spa', minus: 'def' },
+    "Modest": { plus: 'spa', minus: 'atk' },
+    "Naive": { plus: 'spe', minus: 'spd' },
+    "Naughty": { plus: 'atk', minus: 'spd' },
+    "Quiet": { plus: 'spa', minus: 'spe' },
+    "Rash": { plus: 'spa', minus: 'spd' },
+    "Relaxed": { plus: 'def', minus: 'spe' },
+    "Sassy": { plus: 'spd', minus: 'spe' },
+    "Timid": { plus: 'spe', minus: 'atk' }
+};
+
 function appendList(listId, options, rootElement, label = null, selected = null, onSelect = null) {
     const container = document.createElement('div');
     container.className = 'custom-select';
@@ -298,8 +330,43 @@ function insertStats(rootElement, structureId, stats) {
         }
 
         document.getElementById(`${structureId}-${stat}-calc`).textContent = calculated;
-        updateTotalEVs(structureId); // ADD THIS LINE
+        updateTotalEVs(structureId); // ADD THIS LINE// Apply nature multiplier
+
+        // 1. Recupera la natura attuale
+        const natureSelectElement = document.getElementById(`${structureId}-nature-select-value`);
+        let natureEffect = null;
+        if (natureSelectElement) {
+            const natureName = natureSelectElement.textContent.split(' ')[0];
+            natureEffect = NATURE_EFFECTS[natureName];
+        }
+
+        // 2. Applica modificatori natura
+        if (natureEffect && stat !== 'hp') {
+            if (natureEffect.plus === stat) {
+                calculated = Math.floor(calculated * 1.1);
+            } else if (natureEffect.minus === stat) {
+                calculated = Math.floor(calculated * 0.9);
+            }
+        }
+
+        // 3. Aggiorna colore
+        const calcCell = document.getElementById(`${structureId}-${stat}-calc`);
+        calcCell.textContent = calculated;
+
+        if (natureEffect) {
+            calcCell.style.color = natureEffect.plus === stat ? 'green' :
+                natureEffect.minus === stat ? 'red' : '';
+        } else {
+            calcCell.style.color = '';
+        }
     };
+
+    const natureSelect = document.getElementById(`${structureId}-nature-select`);
+    if (natureSelect) {
+        natureSelect.addEventListener('click', () => {
+            setTimeout(calculateAllStats, 10);
+        });
+    }
 
     // Add multiplier change listener
     const speedMultiplier = document.getElementById(`${structureId}-spe-multiplier`);
@@ -358,8 +425,6 @@ function insertStats(rootElement, structureId, stats) {
         });
     }
 
-    // Calculate initial stats
-    calculateAllStats();
 }
 
 function addBarInteractions(barElement, maxHP, structureId) {
@@ -575,14 +640,11 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
         },
     ];
     // Aggiungi questo array all'inizio del file
-    const NATURES = [
-        "Adamant", "Bashful", "Bold", "Brave", "Calm",
-        "Careful", "Docile", "Gentle", "Hardy", "Hasty",
-        "Impish", "Jolly", "Lax", "Lonely", "Mild",
-        "Modest", "Naive", "Naughty", "Quiet", "Quirky",
-        "Rash", "Relaxed", "Sassy", "Serious", "Timid"
-    ];
-
+    const NATURES = Object.entries(NATURE_EFFECTS).map(([name, effect]) => {
+        return `${name} (+${STAT_DISPLAY_NAMES[effect.plus]} -${STAT_DISPLAY_NAMES[effect.minus]})`;
+    }).concat([
+        "Bashful", "Docile", "Hardy", "Quirky", "Serious"
+    ]).sort();
 
     // Aggiungi callback per gestire la selezione del Pokémon
     const onPokemonSelect = async (selectedName) => {
@@ -646,7 +708,14 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
 
     insertMoves(document.getElementById(`${structureId}-moves-container`), structureId, moves, [], types);
 
-    // Popola le nature
+    // Add nature change listener
+    const natureSelect = document.getElementById(`${structureId}-nature-select`);
+    if (natureSelect) {
+        natureSelect.addEventListener('change', () => {
+            const calculateAllStats = window[`calculateAllStats_${structureId}`];
+            if (calculateAllStats) calculateAllStats();
+        });
+    }
 }
 
 
@@ -718,6 +787,11 @@ function updateAbilities(structureId, abilities) {
     const valueSpan = document.getElementById(`${structureId}-ability-select-value`);
     if (abilities.length > 0) {
         valueSpan.textContent = abilities[0];
+    }
+
+    const calculateAllStatsFunc = window[`calculateAllStats_${structureId}`];
+    if (calculateAllStatsFunc) {
+        calculateAllStatsFunc();
     }
 }
 
