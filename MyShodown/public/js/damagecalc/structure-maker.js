@@ -107,6 +107,11 @@ function appendList(listId, options, rootElement, label = null, selected = null,
             dropdownContent.classList.remove('show');
         }
     });
+
+    if (onSelect) {
+        // Chiama il callback con il valore iniziale
+        setTimeout(() => onSelect(valueSpan.textContent), 0);
+    }
 }
 
 
@@ -363,9 +368,7 @@ function insertStats(rootElement, structureId, stats) {
 
     const natureSelect = document.getElementById(`${structureId}-nature-select`);
     if (natureSelect) {
-        natureSelect.addEventListener('click', () => {
-            setTimeout(calculateAllStats, 10);
-        });
+        natureSelect.addEventListener('change', calculateAllStats);
     }
 
     // Add multiplier change listener
@@ -699,7 +702,19 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
 
     insertStats(document.getElementById(`${structureId}-stats`), structureId, stats);
 
-    appendList(`${structureId}-nature-select`, NATURES, document.getElementById(`${structureId}-nature`), 'Nature', 'Serious');
+    appendList(
+        `${structureId}-nature-select`, 
+        NATURES, 
+        document.getElementById(`${structureId}-nature`), 
+        'Nature', 
+        'Serious',
+        // Aggiungi questo callback
+        () => {
+            const calculateAllStats = window[`calculateAllStats_${structureId}`];
+            if (calculateAllStats) calculateAllStats();
+        }
+    );
+
     appendList(`${structureId}-ability-select`, ['?'], document.getElementById(`${structureId}-ability`), 'Ability');
     appendList(`${structureId}-item-select`, ['(none)'], document.getElementById(`${structureId}-item`), 'Item');
     appendList(`${structureId}-status-select`, ['Healthy', 'Poisoned', 'Badly Poisoned', 'Burned', 'Paralyzed', 'Asleep', 'Frozen'], document.getElementById(`${structureId}-status`), 'Status');
@@ -708,14 +723,7 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
 
     insertMoves(document.getElementById(`${structureId}-moves-container`), structureId, moves, [], types);
 
-    // Add nature change listener
-    const natureSelect = document.getElementById(`${structureId}-nature-select`);
-    if (natureSelect) {
-        natureSelect.addEventListener('change', () => {
-            const calculateAllStats = window[`calculateAllStats_${structureId}`];
-            if (calculateAllStats) calculateAllStats();
-        });
-    }
+
 }
 
 
