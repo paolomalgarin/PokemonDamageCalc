@@ -27,6 +27,22 @@ body {
                 justify-content: space-between;
                 width: 100%;
 
+                & #field-options-container {
+                    & button {
+                        all: unset;
+                        background-color: var(--alt-primary-color);
+                        padding: 5px;
+                        border-radius: 2px;
+                        cursor: pointer;
+                            border: solid 1px var(--alt-primary-color);
+                        box-sizing: border-box;
+
+                        &:hover {
+                            border: solid 1px var(--accent-color);
+                        }
+                    }
+                }
+
                 & .pkmn-container {
                     width: min(100%, 500px);
                     padding: 10px;
