@@ -34,7 +34,7 @@ body {
                         padding: 5px;
                         border-radius: 2px;
                         cursor: pointer;
-                            border: solid 1px var(--alt-primary-color);
+                        border: solid 1px var(--alt-primary-color);
                         box-sizing: border-box;
 
                         &:hover {
@@ -65,11 +65,33 @@ body {
                     }
 
                     & .moves-container {
+
                         & .move-container {
                             display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 2px;
+                            margin: 0 1px;
 
                             & input[type='number'] {
                                 width: 3rem;
+                            }
+
+                            & select {
+                                height: 100%;
+                            }
+
+                            & .crit-btn {
+                                border: solid 1px var(--t-secondary-color);
+                                margin: 2px;
+                                border-radius: 2px;
+                                padding: 2px;
+                                cursor: pointer;
+                            }
+
+                            & input[type='checkbox']:checked+.crit-btn {
+                                border-color: var(--accent-color);
+                                color: var(--accent-color);
                             }
                         }
                     }

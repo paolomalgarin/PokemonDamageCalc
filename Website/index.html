@@ -20,7 +20,7 @@
                 <option value="6">Gen 6+</option>
             </select>
         </div>
-        
+
         <div class="calc_form">
             <div class="option-container">
                 <div id="pkmn-container-1" class="pkmn-container"></div>
@@ -107,7 +107,7 @@
             let pkmnType2 = document.getElementById(`pkmn${pkmnNumber}-type-2-value`).innerText.toLowerCase();
             let isStab = (pkmnType1 == moveType || pkmnType2 == moveType);
 
-            let isCrit = document.getElementById(`pkmn${pkmnNumber}-move-iscrit-${moveNumber}`).value;
+            let isCrit = document.getElementById(`pkmn${pkmnNumber}-move-iscrit-${moveNumber}`).checked;
             
 
             let minDamage = calc_damage_gen6plus(attackerLvl, moveBsp, atkStat, atkMult, defStat, defMult, typeEff, isStab, isCrit, 1.0, -1);
