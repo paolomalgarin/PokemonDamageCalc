@@ -13,7 +13,14 @@
 
 <body>
     <main>
-        <div class="settings"></div>
+        <div class="settings">
+            <select name="gens" id="gens">
+                <option value="1">Gen 1</option>
+                <option value="2">Gen 2-5</option>
+                <option value="6">Gen 6+</option>
+            </select>
+        </div>
+        
         <div class="calc_form">
             <div class="option-container">
                 <div id="pkmn-container-1" class="pkmn-container"></div>
@@ -99,10 +106,12 @@
             let pkmnType1 = document.getElementById(`pkmn${pkmnNumber}-type-1-value`).innerText.toLowerCase();
             let pkmnType2 = document.getElementById(`pkmn${pkmnNumber}-type-2-value`).innerText.toLowerCase();
             let isStab = (pkmnType1 == moveType || pkmnType2 == moveType);
+
+            let isCrit = document.getElementById(`pkmn${pkmnNumber}-move-iscrit-${moveNumber}`).value;
             
 
-            let minDamage = calc_damage_gen6plus(attackerLvl, moveBsp, atkStat, atkMult, defStat, defMult, typeEff, isStab, false, 1.0, -1);
-            let maxDamage = calc_damage_gen6plus(attackerLvl, moveBsp, atkStat, atkMult, defStat, defMult, typeEff, isStab, false, 1.0, 1);
+            let minDamage = calc_damage_gen6plus(attackerLvl, moveBsp, atkStat, atkMult, defStat, defMult, typeEff, isStab, isCrit, 1.0, -1);
+            let maxDamage = calc_damage_gen6plus(attackerLvl, moveBsp, atkStat, atkMult, defStat, defMult, typeEff, isStab, isCrit, 1.0, 1);
 
 
             console.log('attackerLvl', attackerLvl);
@@ -113,6 +122,7 @@
             console.log('defMult', defMult);
             console.log('typeEff', typeEff);
             console.log('isStab', isStab);
+            console.log('isCrit', isCrit);
             console.log('-');
             console.log('minDamage', minDamage);
             console.log('maxDamage', maxDamage);
