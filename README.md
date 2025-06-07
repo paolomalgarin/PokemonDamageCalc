@@ -51,7 +51,7 @@ Supporta sia **calcoli semplici** che **situazioni competitive avanzate**, con a
 
 > Ecco un esempio del pannello utente:
 
-<img src="https://raw.githubusercontent.com/paolomalgarin/PokemonDamageCalc/blob/main/README%20-%20Stuff/ui-sample.png" alt="damage calc UI" width=75%>
+<img src="https://github.com/paolomalgarin/PokemonDamageCalc/blob/main/README%20-%20Stuff/ui-sample.png" alt="damage calc UI" width=75%>
 
 ---
 
