@@ -4,5 +4,5 @@
 
 <br><br>
 
-<a href='https://paolomalgarin.github.io/PokemonDamageCalc/Website'>Visit our website</a>
+<a href='https://paolomalgarin.github.io/PokemonDamageCalc/Website' target='_blank'>Visit our website</a><br>
 Recreating Chess online... 🚧🚧
