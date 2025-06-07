@@ -34,6 +34,8 @@ function fetchPkmnNames(dropdown, onSelectCallback) {
                 option.addEventListener('click', () => onSelectCallback(name));
                 dropdown.appendChild(option);
             });
+
+            onSelectCallback(names[0]);
         })
         .catch(error => console.error('Errore nel fetch:', error));
 }
