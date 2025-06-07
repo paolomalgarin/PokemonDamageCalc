@@ -5,7 +5,7 @@
 
 const TYPE_CHART = {
     // =============================================
-    // GENERAZIONE 1 (15 Tipi)
+    // GENERAZIONE 1 (16 Tipi: +???)
     // =============================================
     GEN1: {
         normal: {
@@ -24,6 +24,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 1,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         fighting: {
             normal: 2,
@@ -41,6 +42,7 @@ const TYPE_CHART = {
             psychic: 0.5,
             ice: 2,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         flying: {
             normal: 1,
@@ -58,6 +60,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 1,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         poison: {
             normal: 1,
@@ -66,7 +69,7 @@ const TYPE_CHART = {
             poison: 0.5,
             ground: 0.5,
             rock: 0.5,
-            bug: 2,
+            bug: 1,
             ghost: 0.5,
             fire: 1,
             water: 1,
@@ -75,6 +78,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 1,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         ground: {
             normal: 1,
@@ -92,6 +96,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 1,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         rock: {
             normal: 1,
@@ -109,6 +114,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 2,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         bug: {
             normal: 1,
@@ -126,6 +132,7 @@ const TYPE_CHART = {
             psychic: 2,
             ice: 1,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         ghost: {
             normal: 0,   // Immune
@@ -143,6 +150,7 @@ const TYPE_CHART = {
             psychic: 0,  // Immune (bug Gen1)
             ice: 1,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         fire: {
             normal: 1,
@@ -160,6 +168,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 2,
             dragon: 0.5,
+            '???': 1,   // Aggiunto
         },
         water: {
             normal: 1,
@@ -177,6 +186,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 1,
             dragon: 0.5,
+            '???': 1,   // Aggiunto
         },
         grass: {
             normal: 1,
@@ -194,6 +204,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 1,
             dragon: 0.5,
+            '???': 1,   // Aggiunto
         },
         electric: {
             normal: 1,
@@ -211,6 +222,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 1,
             dragon: 0.5,
+            '???': 1,   // Aggiunto
         },
         psychic: {
             normal: 1,
@@ -228,6 +240,7 @@ const TYPE_CHART = {
             psychic: 0.5,
             ice: 1,
             dragon: 1,
+            '???': 1,   // Aggiunto
         },
         ice: {
             normal: 1,
@@ -245,6 +258,7 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 0.5,
             dragon: 2,
+            '???': 1,   // Aggiunto
         },
         dragon: {
             normal: 1,
@@ -262,11 +276,31 @@ const TYPE_CHART = {
             psychic: 1,
             ice: 1,
             dragon: 2,
+            '???': 1,   // Aggiunto
+        },
+        // Nuovo tipo ??? (Gen1)
+        '???': {
+            normal: 1,
+            fighting: 1,
+            flying: 1,
+            poison: 1,
+            ground: 1,
+            rock: 1,
+            bug: 1,
+            ghost: 1,
+            fire: 1,
+            water: 1,
+            grass: 1,
+            electric: 1,
+            psychic: 1,
+            ice: 1,
+            dragon: 1,
+            '???': 1,   // vs se stesso
         },
     },
 
     // =============================================
-    // GENERAZIONE 2 (17 Tipi: +Steel, Dark)
+    // GENERAZIONE 2 (18 Tipi: +Steel, Dark, ???)
     // =============================================
     GEN2: {
         normal: {
@@ -287,6 +321,7 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 1,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         fighting: {
             normal: 2,
@@ -306,6 +341,7 @@ const TYPE_CHART = {
             ice: 2,
             dragon: 1,
             dark: 2,
+            '???': 1,   // Aggiunto
         },
         flying: {
             normal: 1,
@@ -325,6 +361,7 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 1,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         poison: {
             normal: 1,
@@ -333,7 +370,7 @@ const TYPE_CHART = {
             poison: 0.5,
             ground: 0.5,
             rock: 0.5,
-            bug: 0.5, // Cambiato da 2x (Gen1) a 0.5x (Gen2)
+            bug: 0.5,
             ghost: 0.5,
             steel: 0,
             fire: 1,
@@ -344,6 +381,7 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 1,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         ground: {
             normal: 1,
@@ -363,6 +401,7 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 1,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         rock: {
             normal: 1,
@@ -382,12 +421,13 @@ const TYPE_CHART = {
             ice: 2,
             dragon: 1,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         bug: {
             normal: 1,
             fighting: 0.5,
             flying: 0.5,
-            poison: 0.5, // Cambiato da 2x (Gen1) a 0.5x (Gen2)
+            poison: 0.5,
             ground: 1,
             rock: 1,
             bug: 1,
@@ -401,6 +441,7 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 1,
             dark: 2,
+            '???': 1,   // Aggiunto
         },
         ghost: {
             normal: 0,
@@ -416,10 +457,11 @@ const TYPE_CHART = {
             water: 1,
             grass: 1,
             electric: 1,
-            psychic: 2, // Corretto: ora colpisce Psychic (2x)
+            psychic: 2,
             ice: 1,
             dragon: 1,
             dark: 0.5,
+            '???': 1,   // Aggiunto
         },
         steel: {
             normal: 0.5,
@@ -439,6 +481,7 @@ const TYPE_CHART = {
             ice: 0.5,
             dragon: 0.5,
             dark: 0.5,
+            '???': 1,   // Aggiunto
         },
         dark: {
             normal: 1,
@@ -454,10 +497,11 @@ const TYPE_CHART = {
             water: 1,
             grass: 1,
             electric: 1,
-            psychic: 0, // Immune
+            psychic: 0,
             ice: 1,
             dragon: 1,
             dark: 0.5,
+            '???': 1,   // Aggiunto
         },
         fire: {
             normal: 1,
@@ -477,6 +521,7 @@ const TYPE_CHART = {
             ice: 2,
             dragon: 0.5,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         water: {
             normal: 1,
@@ -496,6 +541,7 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 0.5,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         grass: {
             normal: 1,
@@ -515,6 +561,7 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 0.5,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         electric: {
             normal: 1,
@@ -534,6 +581,7 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 0.5,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         psychic: {
             normal: 1,
@@ -552,7 +600,8 @@ const TYPE_CHART = {
             psychic: 0.5,
             ice: 1,
             dragon: 1,
-            dark: 0, // Immune a Dark
+            dark: 0,
+            '???': 1,   // Aggiunto
         },
         ice: {
             normal: 1,
@@ -572,6 +621,7 @@ const TYPE_CHART = {
             ice: 0.5,
             dragon: 2,
             dark: 1,
+            '???': 1,   // Aggiunto
         },
         dragon: {
             normal: 1,
@@ -591,11 +641,33 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 2,
             dark: 1,
+            '???': 1,   // Aggiunto
+        },
+        // Nuovo tipo ??? (Gen2)
+        '???': {
+            normal: 1,
+            fighting: 1,
+            flying: 1,
+            poison: 1,
+            ground: 1,
+            rock: 1,
+            bug: 1,
+            ghost: 1,
+            steel: 1,
+            fire: 1,
+            water: 1,
+            grass: 1,
+            electric: 1,
+            psychic: 1,
+            ice: 1,
+            dragon: 1,
+            dark: 1,
+            '???': 1,   // vs se stesso
         },
     },
 
     // =============================================
-    // GENERAZIONE 6 (18 Tipi: +Fairy)
+    // GENERAZIONE 6 (19 Tipi: +Fairy, ???)
     // =============================================
     GEN6: {
         normal: {
@@ -617,6 +689,7 @@ const TYPE_CHART = {
             dragon: 1,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         fighting: {
             normal: 2,
@@ -636,7 +709,8 @@ const TYPE_CHART = {
             ice: 2,
             dragon: 1,
             dark: 2,
-            fairy: 0.5, // Resistenti a Fighting
+            fairy: 0.5,
+            '???': 1,   // Aggiunto
         },
         flying: {
             normal: 1,
@@ -657,6 +731,7 @@ const TYPE_CHART = {
             dragon: 1,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         poison: {
             normal: 1,
@@ -676,7 +751,8 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 1,
             dark: 1,
-            fairy: 2, // Super efficace vs Fairy
+            fairy: 2,
+            '???': 1,   // Aggiunto
         },
         ground: {
             normal: 1,
@@ -697,6 +773,7 @@ const TYPE_CHART = {
             dragon: 1,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         rock: {
             normal: 1,
@@ -717,6 +794,7 @@ const TYPE_CHART = {
             dragon: 1,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         bug: {
             normal: 1,
@@ -737,6 +815,7 @@ const TYPE_CHART = {
             dragon: 1,
             dark: 2,
             fairy: 0.5,
+            '???': 1,   // Aggiunto
         },
         ghost: {
             normal: 0,
@@ -757,6 +836,7 @@ const TYPE_CHART = {
             dragon: 1,
             dark: 0.5,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         steel: {
             normal: 0.5,
@@ -766,17 +846,18 @@ const TYPE_CHART = {
             ground: 2,
             rock: 0.5,
             bug: 0.5,
-            ghost: 1,    // Resistenza rimossa (Gen6)
+            ghost: 1,
             steel: 0.5,
             fire: 2,
             water: 1,
             grass: 0.5,
-            electric: 1, // Non più resistente a Electric
+            electric: 1,
             psychic: 0.5,
             ice: 0.5,
             dragon: 0.5,
-            dark: 1,     // Resistenza rimossa (Gen6)
-            fairy: 0.5,  // Super efficace vs Fairy
+            dark: 1,
+            fairy: 0.5,
+            '???': 1,   // Aggiunto
         },
         fire: {
             normal: 1,
@@ -797,6 +878,7 @@ const TYPE_CHART = {
             dragon: 0.5,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         water: {
             normal: 1,
@@ -817,6 +899,7 @@ const TYPE_CHART = {
             dragon: 0.5,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         grass: {
             normal: 1,
@@ -837,6 +920,7 @@ const TYPE_CHART = {
             dragon: 0.5,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         electric: {
             normal: 1,
@@ -847,7 +931,7 @@ const TYPE_CHART = {
             rock: 1,
             bug: 1,
             ghost: 1,
-            steel: 1,    // Non più resistente (Gen6)
+            steel: 1,
             fire: 1,
             water: 2,
             grass: 0.5,
@@ -857,6 +941,7 @@ const TYPE_CHART = {
             dragon: 0.5,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         psychic: {
             normal: 1,
@@ -875,8 +960,9 @@ const TYPE_CHART = {
             psychic: 0.5,
             ice: 1,
             dragon: 1,
-            dark: 0, // Immune a Dark
+            dark: 0,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         ice: {
             normal: 1,
@@ -897,6 +983,7 @@ const TYPE_CHART = {
             dragon: 2,
             dark: 1,
             fairy: 1,
+            '???': 1,   // Aggiunto
         },
         dragon: {
             normal: 1,
@@ -916,7 +1003,8 @@ const TYPE_CHART = {
             ice: 2,
             dragon: 2,
             dark: 1,
-            fairy: 0, // Immune a Dragon
+            fairy: 0,
+            '???': 1,   // Aggiunto
         },
         dark: {
             normal: 1,
@@ -936,7 +1024,8 @@ const TYPE_CHART = {
             ice: 1,
             dragon: 1,
             dark: 0.5,
-            fairy: 0.5, // Debole a Fairy
+            fairy: 0.5,
+            '???': 1,   // Aggiunto
         },
         fairy: {
             normal: 1,
@@ -954,9 +1043,32 @@ const TYPE_CHART = {
             electric: 1,
             psychic: 1,
             ice: 1,
-            dragon: 0,   // Immune a Dragon
-            dark: 2,     // Super efficace vs Dark
+            dragon: 0,
+            dark: 2,
             fairy: 1,
+            '???': 1,   // Aggiunto
+        },
+        // Nuovo tipo ??? (Gen6)
+        '???': {
+            normal: 1,
+            fighting: 1,
+            flying: 1,
+            poison: 1,
+            ground: 1,
+            rock: 1,
+            bug: 1,
+            ghost: 1,
+            steel: 1,
+            fire: 1,
+            water: 1,
+            grass: 1,
+            electric: 1,
+            psychic: 1,
+            ice: 1,
+            dragon: 1,
+            dark: 1,
+            fairy: 1,
+            '???': 1,   // vs se stesso
         },
     },
 };
