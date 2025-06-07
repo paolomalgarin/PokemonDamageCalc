@@ -41,11 +41,18 @@
         <div class="calc_form">
             <div class="option-container">
                 <div id="pkmn-container-1" class="pkmn-container"></div>
+
+                <!-- OPERAZIONI X SCEGLIERE LA MOSSA E IL PKMN + OUTPUT -->
                 <div id="field-options-container">
-                    <button id="pkmn-number-option" onclick="updatePkmn(event)" value="1">Pkmn 1</button>
-                    <button id="move-number-option" onclick="updateMove(event)" value="0">Move 1</button>
-                    <div id="dmg">Damage: </div>
+                    <div class="options">
+                        <button id="pkmn-number-option" onclick="updatePkmn(event)" value="1">Pkmn 1</button>
+                        <button id="move-number-option" onclick="updateMove(event)" value="0">Move 1</button>
+                    </div>
+                    <div class="output">
+                        <div id="dmg"><b>Damage:</b> </div>
+                    </div>
                 </div>
+
                 <div id="pkmn-container-2" class="pkmn-container"></div>
             </div>
 
@@ -144,6 +151,9 @@
                     minDamage = calc_damage_gen6plus(attackerLvl, moveBsp, atkStat, atkMult, defStat, defMult, typeEff, isStab, isCrit, 1.0, -1);
                     maxDamage = calc_damage_gen6plus(attackerLvl, moveBsp, atkStat, atkMult, defStat, defMult, typeEff, isStab, isCrit, 1.0, 1);
             }
+            let defenderHP = Number(document.getElementById(`pkmn${defenderNumber}-hp-calc`).innerText);
+            minDamagePerc = get_damage_perc(defenderHP, minDamage);
+            maxDamagePerc = get_damage_perc(defenderHP, maxDamage);
 
 
             console.log('attackerLvl', attackerLvl);
@@ -160,7 +170,10 @@
             console.log('maxDamage', maxDamage);
             console.log('-----------------------');
 
-            document.getElementById('dmg').innerText = `Damage: ${minDamage} - ${maxDamage}`;
+            document.getElementById('dmg').innerHTML = `
+            <strong>Damage:</strong>
+            <div class="separator"><i>${minDamage}hp</i><span> - </span><i>${maxDamage}hp</i></div>
+            <div class="separator"><i>${minDamagePerc}%</i><span> - </span><i>${maxDamagePerc}%</i></div>`;
         }
 
     </script>

@@ -60,6 +60,12 @@ body {
             justify-content: space-between;
             gap: 10px;
             padding: 10px;
+            position: relative;
+
+            .operations {
+                position: absolute;
+                bottom: 20px;
+            }
 
             & .option-container {
                 display: flex;
@@ -70,17 +76,58 @@ body {
                 width: 100%;
 
                 & #field-options-container {
+                    width: min(100%, 300px);
+                    padding: 10px;
+                    box-sizing: border-box;
+                    background-color: var(--t-primary-color);
+                    border-radius: 2px;
+                    border: solid 2px var(--t-accent-color);
+                    display: flex;
+                    justify-content: space-between;
+
                     & button {
                         all: unset;
                         background-color: var(--alt-primary-color);
                         padding: 5px;
-                        border-radius: 2px;
+                        border-radius: 5px;
                         cursor: pointer;
                         border: solid 1px var(--alt-primary-color);
                         box-sizing: border-box;
+                        text-align: center;
 
                         &:hover {
                             border: solid 1px var(--accent-color);
+                        }
+                    }
+
+                    & .options {
+                        display: flex;
+                        flex-direction: column;
+                        width: 80px;
+                        gap: 5px;
+                    }
+
+                    & .output {
+                        width: calc(100% - 90px);
+                        background-color: var(--secondary-color);
+                        color: var(--primary-color);
+                        border-radius: 5px;
+                        padding: 5px;
+                        box-sizing: border-box;
+
+                        & * {
+                            color: var(--primary-color);
+                        }
+
+                        & #dmg {
+                            display: flex;
+                            flex-direction: column;
+
+                            & .separator {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                            }
                         }
                     }
                 }
@@ -163,16 +210,14 @@ body {
                         }
                     }
                 }
-
-                & #field-options-container {
-                    width: min(100%, 300px);
-                    padding: 10px;
-                    box-sizing: border-box;
-                    background-color: var(--t-primary-color);
-                    border-radius: 2px;
-                    border: solid 2px var(--t-accent-color);
-                }
             }
         }
+    }
+}
+
+
+@media screen and (max-width < 1396px) {
+    .operations {
+        position: relative;
     }
 }
