@@ -598,10 +598,12 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
         <div class="type" id="${structureId}-type"></div>
         <div class="level"><label for="${structureId}-level">Level </label><input type="number" id="${structureId}-level" min="0" max="100" value="100"></div>
         <div class="stats" id="${structureId}-stats"></div>
-        <div class="nature" id="${structureId}-nature"></div>
-        <div class="ability" id="${structureId}-ability"></div>
-        <div class="item" id="${structureId}-item"></div>
-        <div class="status" id="${structureId}-status"></div>
+        <div class="selectables-container">
+            <div class="nature" id="${structureId}-nature"></div>
+            <div class="ability" id="${structureId}-ability"></div>
+            <div class="item" id="${structureId}-item"></div>
+            <div class="status" id="${structureId}-status"></div>
+        </div>
         <div class="health" id="${structureId}-health"></div>
         <div class="moves-container" id="${structureId}-moves-container"></div>
     `;

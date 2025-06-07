@@ -42,7 +42,7 @@ body {
                 }
             }
 
-            & #are-settings-open:checked ~ .settings-options {
+            & #are-settings-open:checked~.settings-options {
                 display: none;
             }
         }
@@ -94,11 +94,36 @@ body {
                     color: var(--primary-color);
                     font-size: var(--text-x-small);
                     position: relative;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
 
                     & .pkmn-sprite {
                         position: absolute;
                         right: 2px;
                         top: 2px;
+                    }
+
+                    & .selectables-container {
+                        width: fit-content;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 2px;
+                        padding: 10px 0;
+
+                        & .status,
+                        .item,
+                        .ability,
+                        .nature {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            gap: 10px;
+                        }
+                    }
+
+                    & .health {
+                        padding: 10px 0;
                     }
 
                     & input,
