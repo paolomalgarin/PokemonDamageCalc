@@ -152,8 +152,8 @@
                     maxDamage = calc_damage_gen6plus(attackerLvl, moveBsp, atkStat, atkMult, defStat, defMult, typeEff, isStab, isCrit, 1.0, 1);
             }
             let defenderHP = Number(document.getElementById(`pkmn${defenderNumber}-hp-calc`).innerText);
-            minDamagePerc = get_damage_perc(defenderHP, minDamage);
-            maxDamagePerc = get_damage_perc(defenderHP, maxDamage);
+            minDamagePerc = Math.floor(get_damage_perc(defenderHP, minDamage));
+            maxDamagePerc = Math.floor(get_damage_perc(defenderHP, maxDamage));
 
 
             console.log('attackerLvl', attackerLvl);

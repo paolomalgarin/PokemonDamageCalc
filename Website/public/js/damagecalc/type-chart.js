@@ -1020,7 +1020,7 @@ const TYPE_CHART = {
             water: 1,
             grass: 1,
             electric: 1,
-            psychic: 0,
+            psychic: 2,
             ice: 1,
             dragon: 1,
             dark: 0.5,
