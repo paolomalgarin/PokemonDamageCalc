@@ -6,7 +6,7 @@
 <br>
 
 # 🤝 Contributors
-<br>
+<i>Un ringraziamento speciale per chi ha collaborato al progetto:</i><br>
 <p>
   <a href="https://github.com/paolomalgarin/PokemonDamageCalc/graphs/contributors">
     <img src="https://contrib.rocks/image?repo=paolomalgarin/PokemonDamageCalc" />
@@ -48,18 +48,16 @@ Supporta sia **calcoli semplici** che **situazioni competitive avanzate**, con a
 ✅ Differenziazione tra generazioni (Gen 1, 2–5, 6+)  
 ✅ Supporto per mosse fisiche/speciali/status  
 ✅ Gestione di STAB, critico e tipo avversario  
-✅ Visualizzazione grafica HP  
-✅ Compatibilità con abilità, status, oggetti e condizioni meteo  
 
 > Ecco un esempio del pannello utente:
 
-<img src="https://raw.githubusercontent.com/paolomalgarin/PokemonDamageCalc/blob/main/README%20-%20Stuff/ui-sample.png" alt="damage calc UI" width=100%>
+<img src="https://raw.githubusercontent.com/paolomalgarin/PokemonDamageCalc/blob/main/README%20-%20Stuff/ui-sample.png" alt="damage calc UI" width=75%>
 
 ---
 
 # 🛠️ Tecnologie Utilizzate
 
-<img src="https://skillicons.dev/icons?i=html,css,js" /> <br>
+<img src="https://skillicons.dev/icons?i=html,css,js" height="50px"/> <br>
 
 - **HTML5/CSS3** — UI responsive e leggibile
 - **Vanilla JavaScript** — logica e interazioni
@@ -73,7 +71,6 @@ Supporta sia **calcoli semplici** che **situazioni competitive avanzate**, con a
 2. Imposta abilità, oggetti, EV, IV, natura e stato  
 3. Scegli la mossa dell’attaccante  
 4. Premi **CALC**  
-5. Guarda l’effetto visivo sulla barra HP
 
 > [!WARNING]
 > Il danno è solo una **stima probabilistica** con range minimo e massimo.
