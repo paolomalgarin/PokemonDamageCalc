@@ -1,11 +1,19 @@
 body {
-    main {
+    & main {
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
 
-        .calc_form {
+        & .settings {
+            & .gear-img {
+                & path {
+                    stroke: var(--alt-primary-color);
+                }
+            }
+        }
+
+        & .calc_form {
             width: min(95%, 1600px);
             box-sizing: border-box;
             border-radius: 5px;

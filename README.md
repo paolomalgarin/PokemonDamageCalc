@@ -83,4 +83,4 @@ Supporta sia **calcoli semplici** che **situazioni competitive avanzate**, con a
 # 📥 Guida all’installazione
 
 # 📄 Licenza
-Questo progetto è rilasciato sotto [MIT License](https://github.com/paolomalgarin/PokemonDamageCalc/blob/main/LICENSE.txt).
+Questo progetto è rilasciato sotto [MIT License](https://github.com/paolomalgarin/PokemonDamageCalc/blob/main/LICENSE).
