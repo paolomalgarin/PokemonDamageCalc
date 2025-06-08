@@ -5,6 +5,24 @@
 </p>
 <br>
 
+# 🗺️ Mission
+**
+
+<br>
+<br>
+
+# 📖 INDICE  
+ * 🤝 [Contributors](#-contributors)
+ * 📌 [Panoramica](#-panoramica)
+ * 🧪 [Funzionalità principali](#-funzionalità-principali)
+ * 🛠️ [Tecnologie Utilizzate](#%EF%B8%8F-tecnologie-utilizzate)  
+ * 🎮 [Esempio d’uso](#-esempio-duso)  
+ * 📄 [Licenza](#-licenza)  
+
+
+<br>
+<br>
+
 # 🤝 Contributors
 <i>Un ringraziamento speciale per chi ha collaborato al progetto:</i><br>
 <p>
@@ -12,17 +30,11 @@
     <img src="https://contrib.rocks/image?repo=paolomalgarin/PokemonDamageCalc" />
   </a>
 </p>
-<br>
-<br>
-
-# 📖 INDICE  
- * 📌 [Panoramica](#-panoramica)
- * 🧪 [Funzionalità principali](#-funzionalità-principali)
- * 🛠️ [Tecnologie Utilizzate](#%EF%B8%8F-tecnologie-utilizzate)  
- * 🎮 [Esempio d’uso](#-esempio-duso)  
- * 📄 [Licenza](#-licenza)  
 
 <br>
+
+---
+
 <br>
 
 # 📌 Panoramica
@@ -39,7 +51,11 @@ Questo progetto è un **calcolatore di danno** Pokémon completamente customizza
 > [!WARNING]  
 > Supporta solo **calcoli semplici**.
 
+<br>
+
 ---
+
+<br>
 
 # 🧪 Funzionalità principali
 
@@ -54,7 +70,11 @@ Questo progetto è un **calcolatore di danno** Pokémon completamente customizza
   <img src="https://github.com/paolomalgarin/PokemonDamageCalc/blob/main/README%20-%20Stuff/ui-sample.png" alt="damage calc UI" width=100%>
 </p>
 
+<br>
+
 ---
+
+<br>
 
 # 🛠️ Tecnologie Utilizzate
 
@@ -64,7 +84,11 @@ Questo progetto è un **calcolatore di danno** Pokémon completamente customizza
 - **Vanilla JavaScript** — logica e interazioni
 - **Pokémon data JSON** — dati su mosse, tipi, stats
 
+<br>
+
 ---
+
+<br>
 
 # 🎮 Esempio d’Uso
 
@@ -73,7 +97,11 @@ Questo progetto è un **calcolatore di danno** Pokémon completamente customizza
 3. Scegli la mossa dell’attaccante  
 4. Premi **CALC**  
 
+<br>
+
 ---
+
+<br>
 
 
 # 📄 Licenza
