@@ -5,8 +5,8 @@
 </p>
 <br>
 
-# 🗺️ Mission
-**
+# 🎯 Mission
+Creare un calcolatore di danno pokemon **bello da vedere**.
 
 <br>
 <br>
