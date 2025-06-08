@@ -364,7 +364,27 @@ function insertStats(rootElement, structureId, stats) {
             }
         }
 
-        // 3. Aggiorna colore
+        // 3. APPLICA MODIFICATORI DI STATO E ABILITÀ
+        const statusElement = document.getElementById(`${structureId}-status-select-value`);
+        const status = statusElement ? statusElement.textContent : "Healthy";
+
+        const abilityElement = document.getElementById(`${structureId}-ability-select-value`);
+        const ability = abilityElement ? abilityElement.textContent : "";
+
+        // Gestione di Guts (ignora riduzione Attacco da bruciatura e aggiunge +50%)
+        if (stat === 'atk' && status !== 'Healthy' && ability === 'Guts') {
+            calculated = Math.floor(calculated * 1.5);
+        }
+        // Effetti standard di stato
+        else {
+            if (stat === 'atk' && status === 'Burned') {
+                calculated = Math.floor(calculated * 0.5);
+            } else if (stat === 'spe' && status === 'Paralyzed') {
+                calculated = Math.floor(calculated * 0.5);
+            }
+        }
+
+        // 4. Aggiorna colore
         const calcCell = document.getElementById(`${structureId}-${stat}-calc`);
         calcCell.textContent = calculated;
 
@@ -730,17 +750,31 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
         }
     );
 
-    appendList(`${structureId}-ability-select`, ['?'], document.getElementById(`${structureId}-ability`), 'Ability');
+    appendList(
+        `${structureId}-ability-select`,
+        ['?'],
+        document.getElementById(`${structureId}-ability`),
+        'Ability',
+        null,
+        () => {
+            // Ricalcola le stats quando cambia l'abilità
+            const calculateAllStats = window[`calculateAllStats_${structureId}`];
+            if (calculateAllStats) calculateAllStats();
+        }
+    );
     appendList(`${structureId}-item-select`, ['(none)'], document.getElementById(`${structureId}-item`), 'Item');
     appendList(
-        `${structureId}-status-select`, 
-        ['Healthy', 'Poisoned', 'Badly Poisoned', 'Burned', 'Paralyzed', 'Asleep', 'Frozen'], 
-        document.getElementById(`${structureId}-status`), 
+        `${structureId}-status-select`,
+        ['Healthy', 'Poisoned', 'Badly Poisoned', 'Burned', 'Paralyzed', 'Asleep', 'Frozen'],
+        document.getElementById(`${structureId}-status`),
         'Status',
         null,
         () => {
             let status = document.getElementById(`${structureId}-status-select-value`).innerText;
             document.getElementById(`${structureId}-sprite-status`).src = STATUSES[status];
+
+            const calculateAllStats = window[`calculateAllStats_${structureId}`];
+            if (calculateAllStats) calculateAllStats();
         }
     );
 
