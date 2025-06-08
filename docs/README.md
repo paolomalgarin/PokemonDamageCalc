@@ -83,7 +83,7 @@ Questo progetto è un **calcolatore di danno** Pokémon completamente customizza
 
 # 🛠️ Tecnologie Utilizzate
 
-<img src="https://skillicons.dev/icons?i=html,css,js" height="50px"/> <br>
+<img src="https://skillicons.dev/icons?i=html,css,js,json" height="50px"/> <br>
 
 - **HTML5/CSS3** — UI responsive e leggibile
 - **Vanilla JavaScript** — logica e interazioni
