@@ -16,7 +16,6 @@
 <br>
 
 # 📖 INDICE  
- * 📥 [Guida all’installazione](#-guida-allinstallazione)
  * 📌 [Panoramica](#-panoramica)
  * 🧪 [Funzionalità principali](#-funzionalità-principali)
  * 🛠️ [Tecnologie Utilizzate](#%EF%B8%8F-tecnologie-utilizzate)  
