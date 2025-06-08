@@ -2,11 +2,9 @@
 <style>
     @keyframes spin {
         0% {transform: rotate(-360deg);}
-        17% {transform: rotate(-720deg);}
-        33% {transform: rotate(-1080deg);}
-        50% {transform: rotate(-1440deg);}
-        65% {transform: rotate(-1800deg);}
-        100% {transform: rotate(-2160deg);}
+        33% {transform: rotate(-720deg);}
+        66% {transform: rotate(-1080deg);}
+        100% {transform: rotate(-1440deg);}
     }
 
     @keyframes drop {
@@ -26,7 +24,7 @@
 
     #pokeball {
         transform-origin: 50% 50%;
-        animation: spin 1s linear;
+        animation: spin .5s linear;
     }
 
     .top-text {
