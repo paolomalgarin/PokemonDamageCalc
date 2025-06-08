@@ -149,6 +149,18 @@ body {
                         position: absolute;
                         right: 2px;
                         top: 2px;
+
+                        & .sprite {
+                            width: 100%;
+                            height: 100%;
+                        }
+
+                        & .pkmn-sprite-status {
+                            position: absolute;
+                            right: 13px;
+                            bottom: 10px;
+                            width: 70px;
+                        }
                     }
 
                     & .selectables-container {

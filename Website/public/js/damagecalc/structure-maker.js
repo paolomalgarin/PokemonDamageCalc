@@ -7,6 +7,16 @@ const STAT_DISPLAY_NAMES = {
     'spe': 'Spe'
 };
 
+const STATUSES = {
+    "Healthy": ".\\public\\img\\status\\Healthy.png",
+    "Asleep": ".\\public\\img\\status\\Asleep.png",
+    "Burned": ".\\public\\img\\status\\Burned.png",
+    "Frozen": ".\\public\\img\\status\\Frozen.png",
+    "Paralyzed": ".\\public\\img\\status\\Paralysis.png",
+    "Poisoned": ".\\public\\img\\status\\Poisoned.png",
+    "Badly Poisoned": ".\\public\\img\\status\\PoisonedBad.png",
+}
+
 const NATURE_EFFECTS = {
     "Adamant": { plus: 'atk', minus: 'spa' },
     "Bold": { plus: 'def', minus: 'atk' },
@@ -592,7 +602,10 @@ function insertMoves(rootElement, structureId, moves, all_moves, types) {
 // funzione di base da modificare in base alla gen
 function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, pkmnName) {
     rootElement.innerHTML = `
-        <img id="${structureId}-sprite" src="" alt="${pkmnName} sprite" class="pkmn-sprite">
+        <div class="pkmn-sprite">
+            <img id="${structureId}-sprite" src="" alt="${pkmnName} sprite" class="sprite">
+            <img id="${structureId}-sprite-status" src=".\\public\\img\\status\\Healthy.png" alt="${pkmnName} status" class="pkmn-sprite-status">
+        </div>
         <h1>${title}</h1>
         <div class="pkmn-select" id="${structureId}-pkmn-select"></div>
         <div class="type" id="${structureId}-type"></div>
@@ -705,10 +718,10 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
     insertStats(document.getElementById(`${structureId}-stats`), structureId, stats);
 
     appendList(
-        `${structureId}-nature-select`, 
-        NATURES, 
-        document.getElementById(`${structureId}-nature`), 
-        'Nature', 
+        `${structureId}-nature-select`,
+        NATURES,
+        document.getElementById(`${structureId}-nature`),
+        'Nature',
         'Serious',
         // Aggiungi questo callback
         () => {
@@ -719,7 +732,17 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
 
     appendList(`${structureId}-ability-select`, ['?'], document.getElementById(`${structureId}-ability`), 'Ability');
     appendList(`${structureId}-item-select`, ['(none)'], document.getElementById(`${structureId}-item`), 'Item');
-    appendList(`${structureId}-status-select`, ['Healthy', 'Poisoned', 'Badly Poisoned', 'Burned', 'Paralyzed', 'Asleep', 'Frozen'], document.getElementById(`${structureId}-status`), 'Status');
+    appendList(
+        `${structureId}-status-select`, 
+        ['Healthy', 'Poisoned', 'Badly Poisoned', 'Burned', 'Paralyzed', 'Asleep', 'Frozen'], 
+        document.getElementById(`${structureId}-status`), 
+        'Status',
+        null,
+        () => {
+            let status = document.getElementById(`${structureId}-status-select-value`).innerText;
+            document.getElementById(`${structureId}-sprite-status`).src = STATUSES[status];
+        }
+    );
 
     insertHealth(document.getElementById(`${structureId}-health`), structureId, 324);
 
