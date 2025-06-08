@@ -8,8 +8,8 @@
 # 🎯 Mission
 Creare un calcolatore di danno pokemon **bello da vedere** per mettere alla prova le nostre abilità come sviluppatori web e designer.
 
-> [!INFO]
-> Il sito si appoggia a [pokeapi](pokeapi.com)
+> [!INFO]  
+> Il progetto si appoggia a [pokeapi](https://pokeapi.co)
 
 <br>
 <br>
