@@ -34,10 +34,10 @@ Questo progetto è un **calcolatore di danno** Pokémon completamente customizza
 - **Mosso tipo, potenza, categoria, STAB, critico**
 - **Tipo di generazione Pokémon** (Gen 1, 2–5, 6+)
 
-Supporta sia **calcoli semplici** che **situazioni competitive avanzate**, con animazioni e indicatori visivi della barra HP.
+*Include il supporto a tutte le formule ufficiali dal Gen 1 fino al Gen 9.*
 
-> [!TIP]
-> Include il supporto a tutte le formule ufficiali dal Gen 1 fino al Gen 9.
+> [!WARNING]  
+> Supporta solo **calcoli semplici**.
 
 ---
 
@@ -72,9 +72,6 @@ Supporta sia **calcoli semplici** che **situazioni competitive avanzate**, con a
 2. Imposta abilità, oggetti, EV, IV, natura e stato  
 3. Scegli la mossa dell’attaccante  
 4. Premi **CALC**  
-
-> [!WARNING]
-> Il danno è solo una **stima probabilistica** con range minimo e massimo.
 
 ---
 
