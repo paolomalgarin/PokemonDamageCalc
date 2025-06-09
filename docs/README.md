@@ -1,12 +1,15 @@
 <p align=center>
   <img src='https://github.com/paolomalgarin/PokemonDamageCalc/blob/main/docs/README%20-%20Stuff/logo-big.svg' alt='MyShowodwn' width=55%><br>
-  <i width=80%>Calcolatore di danno per battaglie Pokémon, con supporto multi-generazione, abilità, mosse, EV, IV e molto altro.</i><br>
+  <i width=80%>Semplice calcolatore di danno per battaglie Pokémon.</i><br>
    <a href='https://paolomalgarin.github.io/PokemonDamageCalc/Website' target='_blank'>Visit our website</a><br>
 </p>
 <br>
 
 # 🎯 Mission
-Creare un calcolatore di danno pokemon **bello da vedere**.
+Creare un calcolatore di danno pokemon **bello da vedere** per mettere alla prova le nostre abilità come sviluppatori web e designer.
+
+> [!NOTE]  
+> Il progetto si appoggia a [pokeapi](https://pokeapi.co)
 
 <br>
 <br>
@@ -80,7 +83,7 @@ Questo progetto è un **calcolatore di danno** Pokémon completamente customizza
 
 # 🛠️ Tecnologie Utilizzate
 
-<img src="https://skillicons.dev/icons?i=html,css,js" height="50px"/> <br>
+<img src="https://skillicons.dev/icons?i=html,css,js,json" height="50px"/> <br>
 
 - **HTML5/CSS3** — UI responsive e leggibile
 - **Vanilla JavaScript** — logica e interazioni
