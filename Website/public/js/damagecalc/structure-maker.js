@@ -384,6 +384,15 @@ function insertStats(rootElement, structureId, stats) {
             }
         }
 
+        if (stat === 'hp') {
+            document.getElementById(`${structureId}-hp`).value = calculated;
+            document.getElementById(`${structureId}-hp`).max = calculated;
+            document.getElementById(`${structureId}-hp-bar`).max = calculated;
+
+            const updateFn = window[`updateHealthBar_${structureId}`];
+            if (updateFn) updateFn(calculated);
+        }
+
         // 4. Aggiorna colore
         const calcCell = document.getElementById(`${structureId}-${stat}-calc`);
         calcCell.textContent = calculated;
@@ -464,19 +473,16 @@ function addBarInteractions(barElement, maxHP, structureId) {
     const hpInput = document.getElementById(`${structureId}-hp`);
     const hpPercentage = document.getElementById(`${structureId}-hp-percentage`);
 
-    // Da barra a input/percentuale
+    // Slider → input/percentuale
     barElement.addEventListener('input', (e) => {
-        // parte di stile
-        const value = e.target.value;
-        const max = e.target.max || 100; // Default a 100 se manca l'attributo
-        const percentage = (value / max) * 100;
+        const value = Number(e.target.value);
+        const max   = Number(e.target.max) || 1;
+        const percent = Math.round((value / max) * 100);
 
-        // Aggiorna la CSS variable
-        e.target.style.setProperty('--fill-percentage', percentage + '%');
-
-        // setto il colore
-        if (percentage < 50) {
-            if (percentage < 20) {
+        // Aggiorna CSS fill
+        e.target.style.setProperty('--fill-percentage', `${percent}%`);
+        if (percent < 50) {
+            if (percent < 20) {
                 e.target.style.setProperty('--light-fill-color', 'var(--red)');
                 e.target.style.setProperty('--dark-fill-color', 'var(--dark-red)');
             } else {
@@ -488,46 +494,46 @@ function addBarInteractions(barElement, maxHP, structureId) {
             e.target.style.setProperty('--dark-fill-color', 'var(--dark-green)');
         }
 
-        // conti
-        const percent = Math.round(parseInt(barElement.value) / maxHP * 100);
-        const currentHP = Math.round((percent / 100) * maxHP);
-
-        hpInput.value = currentHP;
-        hpPercentage.textContent = `${percent}%`;
+        // Aggiorna input numerico e percentuale
+        const currentHP = Math.round((percent / 100) * max);
+        if (hpInput)      hpInput.value = currentHP;
+        if (hpPercentage) hpPercentage.textContent = `${percent}%`;
     });
 
-    // Da input a barra/percentuale
-    hpInput.addEventListener('change', () => {
-        let currentHP = Math.min(maxHP, Math.max(0, parseInt(hpInput.value) || 0));
-        const percent = Math.round(currentHP / maxHP * 100);
+    // Input → slider/percentuale
+    if (hpInput) {
+        hpInput.addEventListener('change', () => {
+            const newHP = Math.min(Number(hpInput.value) || 0, Number(barElement.max) || 0);
+            const percent = Math.round((newHP / (Number(barElement.max) || 1)) * 100);
 
-        barElement.value = currentHP;
-        hpPercentage.textContent = `${percent}%`;
+            barElement.value = newHP;
+            hpPercentage.textContent = `${percent}%`;
 
-        // Aggiorna la CSS variable
-        barElement.style.setProperty('--fill-percentage', percent + '%');
-
-        // setto il colore
-        if (percent < 50) {
-            if (percent < 20) {
-                barElement.style.setProperty('--light-fill-color', 'var(--red)');
-                barElement.style.setProperty('--dark-fill-color', 'var(--dark-red)');
+            // Aggiorna CSS fill
+            barElement.style.setProperty('--fill-percentage', `${percent}%`);
+            if (percent < 50) {
+                if (percent < 20) {
+                    barElement.style.setProperty('--light-fill-color', 'var(--red)');
+                    barElement.style.setProperty('--dark-fill-color', 'var(--dark-red)');
+                } else {
+                    barElement.style.setProperty('--light-fill-color', 'var(--orange)');
+                    barElement.style.setProperty('--dark-fill-color', 'var(--dark-orange)');
+                }
             } else {
-                barElement.style.setProperty('--light-fill-color', 'var(--orange)');
-                barElement.style.setProperty('--dark-fill-color', 'var(--dark-orange)');
+                barElement.style.setProperty('--light-fill-color', 'var(--green)');
+                barElement.style.setProperty('--dark-fill-color', 'var(--dark-green)');
             }
-        } else {
-            barElement.style.setProperty('--light-fill-color', 'var(--green)');
-            barElement.style.setProperty('--dark-fill-color', 'var(--dark-green)');
-        }
-    });
+        });
+    }
 }
+
+
 // Update insertHealth function
 function insertHealth(rootElement, structureId, maxHP) {
     rootElement.innerHTML = `
     <label for="${structureId}-hp-bar">Current HP </label>
     <input type="number" id="${structureId}-hp" min="0" max="${maxHP}" value="${maxHP}">
-    /${maxHP} (<span class="hp-percentage" id="${structureId}-hp-percentage">100%</span>)
+    /<span id="${structureId}-hp-tot">${maxHP}</span> (<span class="hp-percentage" id="${structureId}-hp-percentage">100%</span>)
     <input type="range" class="hp-input-range" min="0" max="${maxHP}" value="${maxHP}" step="1" id="${structureId}-hp-bar">
     `;
 
@@ -536,6 +542,21 @@ function insertHealth(rootElement, structureId, maxHP) {
     if (barElement) {
         addBarInteractions(barElement, maxHP, structureId);
     }
+
+    // Aggiungi questa funzione per aggiornare la barra HP
+    window[`updateHealthBar_${structureId}`] = (newMaxHP) => {
+        const bar = document.getElementById(`${structureId}-hp-bar`);
+        const input = document.getElementById(`${structureId}-hp`);
+        const totalSpan = document.getElementById(`${structureId}-hp-tot`);
+
+        if (bar) {
+            bar.max = newMaxHP;
+            bar.value = newMaxHP; // Resetta HP al massimo
+            bar.dispatchEvent(new Event('input')); // Aggiorna stile
+        }
+        if (input) input.max = newMaxHP;
+        if (totalSpan) totalSpan.textContent = newMaxHP;
+    };
 }
 
 
@@ -715,6 +736,29 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
         // Aggiorna le abilità
         const abilities = await fetchAbilities(selectedName);
         updateAbilities(structureId, abilities);
+
+        console.log('[onPokemonSelect]', structureId, 'base hp =', pkmnData.stats[0].base_stat);
+
+        // 1) Chiamiamo il tuo updateBaseStats
+        updateBaseStats(structureId, {
+            hp: pkmnData.stats[0].base_stat,
+            attack: pkmnData.stats[1].base_stat,
+            defense: pkmnData.stats[2].base_stat,
+            'special-attack': pkmnData.stats[3].base_stat,
+            'special-defense': pkmnData.stats[4].base_stat,
+            speed: pkmnData.stats[5].base_stat
+        });
+
+        // 2) Leggiamo da DOM il nuovo hp calcolato
+        const hpCalcEl = document.getElementById(`${structureId}-hp-calc`);
+        const newMaxHP = hpCalcEl ? parseInt(hpCalcEl.textContent, 10) : undefined;
+        console.log('[onPokemonSelect] hp-calc innerText =', hpCalcEl?.textContent);
+        console.log('[onPokemonSelect] newMaxHP =', newMaxHP);
+
+        // 3) Chiamiamo esplicitamente il tuo helper per resettare la slider
+        const updateBar = window[`updateHealthBar_${structureId}`];
+        console.log('[onPokemonSelect] updateHealthBar exists?', !!updateBar);
+        if (updateBar && newMaxHP) updateBar(newMaxHP);
     };
 
     // Set initial sprite
@@ -734,8 +778,6 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
 
     appendList(`${structureId}-type-1`, types, document.getElementById(`${structureId}-type`), 'Types ');
     appendList(`${structureId}-type-2`, ['(none)', ...types], document.getElementById(`${structureId}-type`));
-
-    insertStats(document.getElementById(`${structureId}-stats`), structureId, stats);
 
     appendList(
         `${structureId}-nature-select`,
@@ -780,15 +822,21 @@ function createPkmnContainerStructure_GENERIC(rootElement, structureId, title, p
 
     insertHealth(document.getElementById(`${structureId}-health`), structureId, 324);
 
+    insertStats(document.getElementById(`${structureId}-stats`), structureId, stats);
+
     insertMoves(document.getElementById(`${structureId}-moves-container`), structureId, moves, [], types);
 
 
+    document.getElementById(`${structureId}-hp-calc`).addEventListener('change', () => {
+        document.getElementById(`${structureId}-hp-bar`).value = document.getElementById(`${structureId}-hp-calc`).innerText;
+    });
 }
 
 
 
 // Aggiungi questa funzione per aggiornare le statistiche
 function updateBaseStats(structureId, stats) {
+    // 1) Update the base‐stat inputs
     document.getElementById(`${structureId}-hp-bs`).value = stats.hp;
     document.getElementById(`${structureId}-atk-bs`).value = stats.attack;
     document.getElementById(`${structureId}-def-bs`).value = stats.defense;
@@ -796,10 +844,23 @@ function updateBaseStats(structureId, stats) {
     document.getElementById(`${structureId}-spd-bs`).value = stats['special-defense'];
     document.getElementById(`${structureId}-spe-bs`).value = stats.speed;
 
-    // Recalculate all stats
-    const calculateAllStats = window[`calculateAllStats_${structureId}`];
-    if (calculateAllStats) calculateAllStats();
+    // 2) Recalculate all stats (this updates the #…-hp-calc cell)
+    const recalc = window[`calculateAllStats_${structureId}`];
+    if (recalc) recalc();
+
+    // 3) Read the newly computed HP
+    const hpCalcEl = document.getElementById(`${structureId}-hp-calc`);
+    const newMaxHP = hpCalcEl
+        ? parseInt(hpCalcEl.textContent, 10) || stats.hp
+        : stats.hp;
+
+    // 4) Sync the slider via your helper
+    const updateBar = window[`updateHealthBar_${structureId}`];
+    if (updateBar) updateBar(newMaxHP);
 }
+
+
+
 
 // Aggiungi questa funzione per aggiornare i tipi
 function updateTypes(structureId, types) {
